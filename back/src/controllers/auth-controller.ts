@@ -5,6 +5,8 @@ import bcrypt from "bcrypt";
 import HttpException from "../util/http-exception";
 import { LoginDto } from "../dto/LoginDto";
 import jwt from "jsonwebtoken";
+import { ForgotPasswordDto } from "../dto/forgotPasswordDto";
+import { sendEmail } from "../util/mail-sender";
 
 export const loginController = async (
   req: Request,
@@ -28,7 +30,7 @@ export const loginController = async (
     if (!passwordMatch) throw new HttpException(401, "Unauthorized");
 
     const accessToken = jwt.sign(
-      { name: user.FristName, role: user.Role },
+      { name: user.FristName, role: user.Role, email: user.Email },
       process.env.JWT_SECRET as string,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -67,6 +69,31 @@ export const registerController = async (
     });
 
     res.status(200).json(newUser);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const forgotPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const email = (req.body as ForgotPasswordDto).email;
+
+    const user = await prisma.user.findFirst({ where: { Email: email } });
+
+    if (!user) throw new HttpException(404, "Not found");
+
+    const mail = await sendEmail({
+      from: "eventpass0@gmail.com",
+      to: user.Email,
+      subject: "test",
+      text: "hellooooo",
+    });
+
+    res.status(200).json({ message: "Check your email for further details." });
   } catch (e) {
     next(e);
   }
