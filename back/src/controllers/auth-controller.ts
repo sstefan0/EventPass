@@ -1,10 +1,14 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, response } from "express";
 import { RegisterDto } from "../dto/RegisterDto";
 import { prisma } from "../util/prisma-client";
 import bcrypt from "bcrypt";
 import HttpException from "../util/http-exception";
 import { LoginDto } from "../dto/LoginDto";
 import jwt from "jsonwebtoken";
+import { ForgotPasswordDto } from "../dto/forgotPasswordDto";
+import { generateHTMLMessage, sendEmail } from "../util/mail-sender";
+import crypto from "crypto";
+import { ResetPasswordDto } from "../dto/resetPasswordDto";
 
 export const loginController = async (
   req: Request,
@@ -28,7 +32,7 @@ export const loginController = async (
     if (!passwordMatch) throw new HttpException(401, "Unauthorized");
 
     const accessToken = jwt.sign(
-      { name: user.FristName, role: user.Role },
+      { name: user.FristName, role: user.Role, email: user.Email },
       process.env.JWT_SECRET as string,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -67,6 +71,74 @@ export const registerController = async (
     });
 
     res.status(200).json(newUser);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const forgotPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const email = (req.body as ForgotPasswordDto).email;
+
+    const user = await prisma.user.findFirst({ where: { Email: email } });
+
+    if (!user) throw new HttpException(404, "Not found");
+
+    const resetToken = crypto.randomBytes(64).toString("hex");
+
+    const expirationTIme = new Date();
+    expirationTIme.setHours(expirationTIme.getHours() + 2);
+    await prisma.user.update({
+      where: { Id: user.Id },
+      data: {
+        ResetToken: resetToken as string,
+        ExpiresAt: expirationTIme,
+      },
+    });
+
+    const mail = await sendEmail({
+      from: "eventpass0@gmail.com",
+      to: user.Email,
+      subject: "test",
+      html: generateHTMLMessage(user.FristName, resetToken),
+    });
+
+    res.status(200).json({ message: "Check your email for further details." });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const resetPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userData = req.body as ResetPasswordDto;
+
+    const user = await prisma.user.findFirst({
+      where: { ResetToken: userData.token },
+    });
+
+    if (!user) throw new HttpException(404, "Not found");
+
+    const currentTime = new Date();
+    if (currentTime > user.ExpiresAt!)
+      throw new HttpException(498, "Token expired/invalid");
+
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+    await prisma.user.update({
+      where: { Id: user.Id },
+      data: { Password: hashedPassword, ExpiresAt: new Date() },
+    });
+
+    res.status(200).json({ message: "Password changed successfully." });
   } catch (e) {
     next(e);
   }

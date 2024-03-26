@@ -18,3 +18,16 @@ export const registerSchema = yup.object({
     role: yup.string().oneOf([Role.ORGANIZER, Role.USER]).required(),
   }),
 });
+
+export const forgotPasswordSchema = yup.object({
+  body: yup.object({
+    email: yup.string().email().required(),
+  }),
+});
+
+export const resetPasswordSchema = yup.object({
+  body: yup.object({
+    password: yup.string().min(8).required(),
+    token: yup.string().required(),
+  }),
+});
