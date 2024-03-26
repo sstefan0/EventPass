@@ -46,3 +46,54 @@ export const sendEmail = async (emailOptions: EmailOptions) => {
   let emailTransporter = await createTransporter();
   return await emailTransporter.sendMail(emailOptions);
 };
+
+export const generateHTMLMessage = (name: string, token: string): string => {
+  console.log(token);
+  return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Password Reset</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        h1 {
+          color: #333;
+        }
+        p {
+          margin-bottom: 20px;
+        }
+        .button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 5px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Password Reset</h1>
+        <p>Hello, ${name}</p>
+        <p>We received a request to reset your password. Click the button below to reset your password.</p>
+        <p><a href="https://www.google.com/${token}" class="button">Reset Password</a></p>
+        <p>If you didn't request a password reset, you can safely ignore this email.</p>
+        <p>Thank you,</p>
+        <p>EventPass</p>
+      </div>
+    </body>
+    </html>
+    `;
+};
