@@ -23,6 +23,7 @@
     "esm": "^3.2.25",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "yup": "^1.4.0"
   }
 }
