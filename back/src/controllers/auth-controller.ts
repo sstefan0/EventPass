@@ -32,7 +32,7 @@ export const loginController = async (
     if (!passwordMatch) throw new HttpException(401, "Unauthorized");
 
     const accessToken = jwt.sign(
-      { name: user.FristName, role: user.Role, email: user.Email },
+      { name: user.FirstName, role: user.Role, email: user.Email },
       process.env.JWT_SECRET as string,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -61,7 +61,7 @@ export const registerController = async (
 
     const newUser = await prisma.user.create({
       data: {
-        FristName: userData.firstName,
+        FirstName: userData.firstName,
         LastName: userData.lastName,
         Email: userData.email,
         PhoneNumber: userData.phoneNumber,
@@ -104,7 +104,7 @@ export const forgotPasswordController = async (
       from: "eventpass0@gmail.com",
       to: user.Email,
       subject: "test",
-      html: generateHTMLMessage(user.FristName, resetToken),
+      html: generateHTMLMessage(user.FirstName, resetToken),
     });
 
     res.status(200).json({ message: "Check your email for further details." });
