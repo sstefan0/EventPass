@@ -1,0 +1,20 @@
+{
+  "user": [
+    {
+      "FirstName": "Stefan",
+      "LastName": "Saratlija",
+      "Email": "saratlija.stefan6@gmail.com",
+      "PhoneNumber": "12345673",
+      "Password": "lozinka123",
+      "Role": "USER"
+    },
+    {
+      "FirstName": "Marko",
+      "LastName": "Markovic",
+      "Email": "mmarkovic2@gmail.com",
+      "PhoneNumber": "12345673",
+      "Password": "lozinka123",
+      "Role": "ORGANIZER"
+    }
+  ]
+}
