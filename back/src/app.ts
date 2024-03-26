@@ -1,12 +1,22 @@
 import express from "express";
-import { Request, Response } from "express";
 import authRouter from "./routes/auth-router";
 import ErrorHandler from "./middleware/error-handler";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
+);
 
 app.use("/auth", authRouter);
 

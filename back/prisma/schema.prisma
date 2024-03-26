@@ -20,4 +20,10 @@ model User {
   Email       String @unique
   PhoneNumber String
   Password    String
+  Role        Role
+}
+
+enum Role {
+  USER
+  ORGANIZER
 }
