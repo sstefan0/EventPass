@@ -47,6 +47,7 @@ model EventTicket {
   TicketTypeId String
   Price        Float
   Description  String?
+  Amount       Int
 }
 
 model City {
