@@ -1,20 +1,225 @@
 {
   "user": [
     {
+      "Id": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
       "FirstName": "Stefan",
       "LastName": "Saratlija",
       "Email": "saratlija.stefan6@gmail.com",
       "PhoneNumber": "12345673",
-      "Password": "lozinka123",
+      "Password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
       "Role": "USER"
     },
     {
+      "Id": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "FirstName": "Marko",
       "LastName": "Markovic",
       "Email": "mmarkovic2@gmail.com",
       "PhoneNumber": "12345673",
-      "Password": "lozinka123",
+      "Password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
       "Role": "ORGANIZER"
+    }
+  ],
+  "ticketType": [
+    {
+      "Id": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Title": "General Admission"
+    },
+    {
+      "Id": "d76f7d93-3a46-4f53-a84a-2e63d3d33b1b",
+      "Title": "VIP"
+    },
+    {
+      "Id": "2fc5cb41-4a55-4a84-bf2d-79b5e0cb726f",
+      "Title": "Early Bird"
+    },
+    {
+      "Id": "fb39c402-fc29-4892-9a11-856336b717cf",
+      "Title": "Student"
+    },
+    {
+      "Id": "fe71de3b-6373-4a23-8f76-1c328e71547f",
+      "Title": "Group"
+    },
+    {
+      "Id": "cfbafdb3-6b8d-4485-bf11-7c3e8f272f8b",
+      "Title": "Backstage Pass"
+    },
+    {
+      "Id": "946d03b4-6057-4f38-9b08-ee244da1b42e",
+      "Title": "VIP Table"
+    },
+    {
+      "Id": "9c44df87-8749-49e5-8606-3b39a0b65aa7",
+      "Title": "All Access"
+    },
+    {
+      "Id": "1bb6041f-31e3-4d6d-8061-9a61a298d5ad",
+      "Title": "Day Pass"
+    },
+    {
+      "Id": "7c2fb947-c155-4d43-8f51-f191eb554e61",
+      "Title": "Child"
+    },
+    {
+      "Id": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Title": "Tribunes"
+    }
+  ],
+  "event": [
+    {
+      "Id": "f2465c37-2a48-47b6-a47d-61800d889834",
+      "Title": "OK Fest",
+      "Description": "OK Fest - jer smo totalno drugačiji od drugih. Pored cjelodnevnog muzičkog programa uživajte u adrenalinskom raftingu najdubljim evropskim kanjonom rijeke Tare. Doživite avanturu šetajući planinskim stazama po obroncima planina Maglića i Zelengore. Uživajte u pogledu sa vidikovaca koji se protežu preko Perućice, jedine očuvane prašume u Evropi. Uz OK avanturu uživajte i u najboljoj OK zabavi uz brojne domaće i svjetske izvođače na 3 festivalska stage-a.",
+      "DateTime": "2024-08-17T20:00:00z",
+      "Location": "Tjentiste, Foca",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "a978f48c-01a9-4575-a3ee-d9f270c72f2a"
+    },
+    {
+      "Id": "3247dd9d-808a-456d-b893-03759e007d43",
+      "Title": "Ed Sheeran",
+      "Description": "Ed Sheeran će doneti svoju rekordnu + - = ÷ x turneju u Evropu 2024. godine. Evropski koncerti će biti nastavak njegove turneje po Evropi od prošle godine.",
+      "DateTime": "2024-08-17T20:00:00z",
+      "Location": "Beograd, Ušće",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a"
+    }
+  ],
+  "eventTickets": [
+    {
+      "Id": "7f5deaa5-7770-49a6-84fb-d0bf5e5c1740",
+      "EventId": "f2465c37-2a48-47b6-a47d-61800d889834",
+      "TicketTypeId": "9c44df87-8749-49e5-8606-3b39a0b65aa7",
+      "Price": 68.0,
+      "Description": "Ulaznica za kamp za cijelo trajanje festivala."
+    },
+    {
+      "Id": "034bb4af-84d3-4f83-9541-94fc7b084532",
+      "EventId": "f2465c37-2a48-47b6-a47d-61800d889834",
+      "TicketTypeId": "1bb6041f-31e3-4d6d-8061-9a61a298d5ad",
+      "Price": 13.0,
+      "Description": "Ulaznica za jedan dan festivala."
+    },
+    {
+      "Id": "4e1b1852-cb78-4b86-8435-563baab33a45",
+      "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
+      "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Price": 75.0,
+      "Description": "Parter stajanje."
+    },
+    {
+      "Id": "477da551-b73e-4439-bfb9-9e71c4604542",
+      "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 250.0,
+      "Description": "Tribine, redovi 1 do 10, I kategorija."
+    },
+    {
+      "Id": "9adfab07-e63e-4ff6-af6a-a0c93735d85a",
+      "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 200.0,
+      "Description": "Tribine, redovi 11 do 20, II kategorija."
+    },
+    {
+      "Id": "92903cba-74fb-4d1b-af4d-2893aaae9709",
+      "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 180.0,
+      "Description": "Tribine, redovi 21 i dalje, III kategorija."
+    }
+  ],
+  "city": [
+    {
+      "Id": "0518e3cb-b57c-4b22-9bc2-0a4d072864cc",
+      "Country": "BIH",
+      "Name": "Sarajevo"
+    },
+    {
+      "Id": "394c4b84-75d9-4f6e-90b2-9d20d1b0b370",
+      "Country": "BIH",
+      "Name": "Banja Luka"
+    },
+    {
+      "Id": "d43bead8-c5c4-4ecf-97a0-59e2cda5816e",
+      "Country": "BIH",
+      "Name": "Tuzla"
+    },
+    {
+      "Id": "c08dc632-63e8-4b18-8c94-8687a6ac13cb",
+      "Country": "BIH",
+      "Name": "Zenica"
+    },
+    {
+      "Id": "7c183f56-c150-4e5c-8d3a-0c0b93322910",
+      "Country": "BIH",
+      "Name": "Mostar"
+    },
+    {
+      "Id": "eaf615bb-3e7c-4f52-ae27-4e11f00c2be0",
+      "Country": "BIH",
+      "Name": "Trebinje"
+    },
+    {
+      "Id": "3092a9da-31d8-4ef8-9c68-4464e48c501d",
+      "Country": "BIH",
+      "Name": "Brčko"
+    },
+    {
+      "Id": "4f2e88c6-446f-4b9f-8d76-6cbb155f950e",
+      "Country": "BIH",
+      "Name": "Prijedor"
+    },
+    {
+      "Id": "a978f48c-01a9-4575-a3ee-d9f270c72f2a",
+      "Country": "BIH",
+      "Name": "Foča"
+    },
+    {
+      "Id": "b54dcf20-43e7-478a-918e-4b7c585b12cc",
+      "Country": "BIH",
+      "Name": "Bijeljina"
+    },
+
+    {
+      "Id": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
+      "Country": "SRB",
+      "Name": "Belgrade"
+    },
+    {
+      "Id": "f0b1f482-14c4-4a7c-b012-02fd1a9cb037",
+      "Country": "SRB",
+      "Name": "Novi Sad"
+    },
+    {
+      "Id": "dc8600d9-15cb-4b67-8633-022e3f9ee0e7",
+      "Country": "SRB",
+      "Name": "Niš"
+    },
+    {
+      "Id": "91c2e9d3-69a7-4da4-9f91-cbe08402d1a5",
+      "Country": "SRB",
+      "Name": "Kragujevac"
+    },
+    {
+      "Id": "e081ef80-2fc1-41b4-83b2-835d486a72cf",
+      "Country": "SRB",
+      "Name": "Subotica"
+    },
+    {
+      "Id": "819a43e2-b3a2-4f33-b29a-f27b124550fd",
+      "Country": "SRB",
+      "Name": "Zrenjanin"
+    },
+    {
+      "Id": "e99e6be3-f6fb-47bc-b3a4-13c37937c32b",
+      "Country": "SRB",
+      "Name": "Čačak"
+    },
+    {
+      "Id": "de92ad2c-d0cd-4de3-b725-8977920807bf",
+      "Country": "SRB",
+      "Name": "Kraljevo"
     }
   ]
 }
