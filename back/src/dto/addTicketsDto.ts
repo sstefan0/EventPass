@@ -3,4 +3,5 @@ export interface AddTicketsDto {
   TicketTypeId: string;
   Price: number;
   Description: string | null;
+  Amount: number;
 }

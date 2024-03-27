@@ -91,42 +91,48 @@
       "EventId": "f2465c37-2a48-47b6-a47d-61800d889834",
       "TicketTypeId": "9c44df87-8749-49e5-8606-3b39a0b65aa7",
       "Price": 68.0,
-      "Description": "Ulaznica za kamp za cijelo trajanje festivala."
+      "Description": "Ulaznica za kamp za cijelo trajanje festivala.",
+      "Amount": 100
     },
     {
       "Id": "034bb4af-84d3-4f83-9541-94fc7b084532",
       "EventId": "f2465c37-2a48-47b6-a47d-61800d889834",
       "TicketTypeId": "1bb6041f-31e3-4d6d-8061-9a61a298d5ad",
       "Price": 13.0,
-      "Description": "Ulaznica za jedan dan festivala."
+      "Description": "Ulaznica za jedan dan festivala.",
+      "Amount": 100
     },
     {
       "Id": "4e1b1852-cb78-4b86-8435-563baab33a45",
       "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
       "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
       "Price": 75.0,
-      "Description": "Parter stajanje."
+      "Description": "Parter stajanje.",
+      "Amount": 100132
     },
     {
       "Id": "477da551-b73e-4439-bfb9-9e71c4604542",
       "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
       "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
       "Price": 250.0,
-      "Description": "Tribine, redovi 1 do 10, I kategorija."
+      "Description": "Tribine, redovi 1 do 10, I kategorija.",
+      "Amount": 10000
     },
     {
       "Id": "9adfab07-e63e-4ff6-af6a-a0c93735d85a",
       "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
       "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
       "Price": 200.0,
-      "Description": "Tribine, redovi 11 do 20, II kategorija."
+      "Description": "Tribine, redovi 11 do 20, II kategorija.",
+      "Amount": 1000
     },
     {
       "Id": "92903cba-74fb-4d1b-af4d-2893aaae9709",
       "EventId": "3247dd9d-808a-456d-b893-03759e007d43",
       "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
       "Price": 180.0,
-      "Description": "Tribine, redovi 21 i dalje, III kategorija."
+      "Description": "Tribine, redovi 21 i dalje, III kategorija.",
+      "Amount": 100
     }
   ],
   "city": [

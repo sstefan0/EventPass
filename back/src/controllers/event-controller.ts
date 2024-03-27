@@ -3,6 +3,8 @@ import { CreateEventDto } from "../dto/createEventDto";
 import { prisma } from "../util/prisma-client";
 import { AddTicketsDto } from "../dto/addTicketsDto";
 import HttpException from "../util/http-exception";
+import { UpdateEventDto } from "../dto/editEventDto";
+import { DeleteDto } from "../dto/deleteDto";
 
 export const createEventController = async (
   req: Request,
@@ -42,6 +44,65 @@ export const addEvenTicketsController = async (
     });
 
     res.status(201).json(eventTickets);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const updateEventController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const newData = req.body as UpdateEventDto;
+    const event = await prisma.event.findFirst({ where: { Id: newData.Id } });
+    if (!event) throw new HttpException(404, "Event not found");
+    if (event.userId != req.user.id)
+      throw new HttpException(
+        401,
+        "You do not have permission to update this event"
+      );
+    const updatedEvent = await prisma.event.update({
+      where: { Id: newData.Id },
+      data: newData,
+    });
+
+    res.status(200).json(updatedEvent);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const deleteEventController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const eventId = (req.query as unknown as DeleteDto).id;
+
+    const deletedEvent = await prisma.event.delete({
+      where: { Id: eventId },
+    });
+
+    res.status(200).json(deletedEvent);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const deleteTicketController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const ticketId = (req.query as unknown as DeleteDto).id;
+    const deletedTicket = await prisma.eventTicket.delete({
+      where: { Id: ticketId },
+    });
+    res.status(200).json(deletedTicket);
   } catch (e) {
     next(e);
   }

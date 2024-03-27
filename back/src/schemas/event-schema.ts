@@ -20,3 +20,20 @@ export const addTicketsSchema = yup.object({
     })
   ),
 });
+
+export const updateEventSchema = yup.object({
+  body: yup.object({
+    Id: yup.string().required().uuid(),
+    Title: yup.string(),
+    Description: yup.string(),
+    DateTime: yup.date(),
+    Location: yup.string(),
+    cityId: yup.string(),
+  }),
+});
+
+export const deleteSchema = yup.object({
+  query: yup.object({
+    id: yup.string().uuid().required(),
+  }),
+});

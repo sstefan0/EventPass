@@ -3,10 +3,12 @@ import authRouter from "./routes/auth-router";
 import ErrorHandler from "./middleware/error-handler";
 import swaggerUi from "swagger-ui-express";
 import eventRouter from "./routes/event-router";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = process.env.PORT;
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(
