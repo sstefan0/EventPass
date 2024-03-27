@@ -32,7 +32,7 @@ export const loginController = async (
     if (!passwordMatch) throw new HttpException(401, "Unauthorized");
 
     const accessToken = jwt.sign(
-      { name: user.FirstName, role: user.Role, email: user.Email },
+      { id: user.Id, name: user.FirstName, role: user.Role, email: user.Email },
       process.env.JWT_SECRET as string,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -106,8 +106,10 @@ export const forgotPasswordController = async (
       subject: "test",
       html: generateHTMLMessage(user.FirstName, resetToken),
     });
-
-    res.status(200).json({ message: "Check your email for further details." });
+    console.log(req.user);
+    res.status(200).json({
+      message: "Check your email for further details.\n",
+    });
   } catch (e) {
     next(e);
   }
