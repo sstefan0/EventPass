@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  Id          String    @id @default(uuid())
+  Id          String     @id @default(uuid())
   FirstName   String
   LastName    String
-  Email       String    @unique
+  Email       String     @unique
   PhoneNumber String
   Password    String
   Role        Role
   ResetToken  String?
   ExpiresAt   DateTime?
   Event       Event[]
+  Purchase    Purchase[]
 }
 
 model Event {
@@ -26,11 +27,19 @@ model Event {
   Description String
   DateTime    DateTime
   Location    String
-  City        City          @relation(fields: [cityId], references: [Id])
+  City        City          @relation(fields: [cityId], references: [Id], onDelete: Cascade)
   CreatedBy   User          @relation(fields: [userId], references: [Id], onDelete: Cascade)
   EventTicket EventTicket[]
   userId      String
   cityId      String
+  Type        EventType     @relation(fields: [eventTypeId], references: [Id], onDelete: Cascade)
+  eventTypeId String
+}
+
+model EventType {
+  Id    String  @id @default(uuid())
+  Title String
+  Event Event[]
 }
 
 model TicketType {
@@ -48,6 +57,7 @@ model EventTicket {
   Price        Float
   Description  String?
   Amount       Int
+  Purchase     Purchase[]
 }
 
 model City {
@@ -55,6 +65,16 @@ model City {
   Country CountryCode
   Name    String
   Event   Event[]
+}
+
+model Purchase {
+  Id            String      @id @default(uuid())
+  PurchasedBy   User        @relation(fields: [userId], references: [Id])
+  Ticket        EventTicket @relation(fields: [eventTicketId], references: [Id])
+  Amount        Int
+  Price         Float
+  userId        String
+  eventTicketId String
 }
 
 enum Role {

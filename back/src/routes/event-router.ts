@@ -5,12 +5,16 @@ import {
   addTicketsSchema,
   updateEventSchema,
   deleteSchema,
+  getEventsSchema,
+  getEventByIdSchema,
 } from "../schemas/event-schema";
 import {
   addEvenTicketsController,
   createEventController,
   deleteEventController,
   deleteTicketController,
+  getEventByIdController,
+  getEventsController,
   updateEventController,
 } from "../controllers/event-controller";
 import authorize from "../middleware/auth-middleware";
@@ -52,4 +56,18 @@ router.delete(
   validate(deleteSchema),
   deleteTicketController
 );
+
+router.get(
+  "/get-all",
+  authorize([]),
+  validate(getEventsSchema),
+  getEventsController
+);
+router.get(
+  "/get-by-id",
+  authorize([]),
+  validate(getEventByIdSchema),
+  getEventByIdController
+);
+
 export default router;

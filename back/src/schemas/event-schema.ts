@@ -37,3 +37,18 @@ export const deleteSchema = yup.object({
     id: yup.string().uuid().required(),
   }),
 });
+
+export const getEventsSchema = yup.object({
+  body: yup.object({
+    startDate: yup.date().nullable(),
+    endDate: yup.date().nullable(),
+    countryCode: yup.string().oneOf(["SRB", "BIH", "CRO", "MNE"]).nullable(),
+    cityId: yup.string().uuid().nullable(),
+    eventTypeId: yup.string().uuid().nullable(),
+  }),
+});
+export const getEventByIdSchema = yup.object({
+  query: yup.object({
+    id: yup.string().uuid().required(),
+  }),
+});

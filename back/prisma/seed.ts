@@ -12,19 +12,39 @@ const cities = seedData.city.map((city) => ({
 }));
 
 async function main() {
-  //delete
-  await prisma.user.deleteMany();
-  await prisma.eventTicket.deleteMany();
-  await prisma.ticketType.deleteMany();
-  await prisma.event.deleteMany();
-  await prisma.city.deleteMany();
+  const deleteUsers = prisma.user.deleteMany();
+  const deleteTicketTypes = prisma.ticketType.deleteMany();
+  const deleteCities = prisma.city.deleteMany();
+  const deleteEventTypes = prisma.eventType.deleteMany();
 
-  //create
-  await prisma.user.createMany({ data: users });
-  await prisma.ticketType.createMany({ data: seedData.ticketType });
-  await prisma.city.createMany({ data: cities });
-  await prisma.event.createMany({ data: seedData.event });
-  await prisma.eventTicket.createMany({ data: seedData.eventTickets });
+  await Promise.all([
+    deleteUsers,
+    deleteCities,
+    deleteTicketTypes,
+    deleteEventTypes,
+  ]);
+
+  const createUsers = prisma.user.createMany({ data: users });
+  const createTicketTypes = prisma.ticketType.createMany({
+    data: seedData.ticketType,
+  });
+  const createCities = prisma.city.createMany({ data: cities });
+  const createEventTypes = prisma.eventType.createMany({
+    data: seedData.eventType,
+  });
+  const createEvents = prisma.event.createMany({ data: seedData.event });
+  const createTickets = prisma.eventTicket.createMany({
+    data: seedData.eventTickets,
+  });
+
+  await Promise.all([
+    createUsers,
+    createTicketTypes,
+    createCities,
+    createEventTypes,
+  ]);
+  await createEvents;
+  await createTickets;
 }
 
 main()

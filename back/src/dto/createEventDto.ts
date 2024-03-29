@@ -4,4 +4,5 @@ export interface CreateEventDto {
   DateTime: Date;
   Location: string;
   cityId: string;
+  eventTypeId: string;
 }
