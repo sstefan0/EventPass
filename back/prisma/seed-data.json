@@ -73,7 +73,8 @@
       "DateTime": "2024-08-17T20:00:00z",
       "Location": "Tjentiste, Foca",
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
-      "cityId": "a978f48c-01a9-4575-a3ee-d9f270c72f2a"
+      "cityId": "a978f48c-01a9-4575-a3ee-d9f270c72f2a",
+      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6"
     },
     {
       "Id": "3247dd9d-808a-456d-b893-03759e007d43",
@@ -82,7 +83,8 @@
       "DateTime": "2024-08-17T20:00:00z",
       "Location": "Beograd, Ušće",
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
-      "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a"
+      "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
+      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6"
     }
   ],
   "eventTickets": [
@@ -226,6 +228,15 @@
       "Id": "de92ad2c-d0cd-4de3-b725-8977920807bf",
       "Country": "SRB",
       "Name": "Kraljevo"
+    }
+  ],
+  "eventType": [
+    { "Id": "ca5bf6ac-61b7-4a33-96fc-0655861587d6", "Title": "Music" },
+    { "Id": "98a9c5fc-57ef-49e0-85e2-b15d75e04e29", "Title": "Sports" },
+    { "Id": "8eae97a5-6099-4a11-9031-d7d0b5cb9e10", "Title": "Arts & Theater" },
+    {
+      "Id": "febce19d-45bf-487e-936f-0bcb9f106065",
+      "Title": "Conferences & Workshops"
     }
   ]
 }
