@@ -213,3 +213,38 @@ export const getEventByIdController = async (
     next(e);
   }
 };
+
+export const getEventStatisticsController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const eventId = (req.query as unknown as GetEventDto).id;
+
+    const purchases = await prisma.purchase.findMany({
+      where: { Ticket: { Event: { Id: eventId } } },
+    });
+
+    const ticketTypes = await prisma.eventTicket.findMany({
+      where: { EventId: eventId },
+    });
+
+    let totalTickets = 0;
+    ticketTypes.forEach((ticketType) => {
+      totalTickets += ticketType.Amount;
+    });
+    let money = 0;
+    let sold = 0;
+    purchases.forEach((purchase) => {
+      money += purchase.Price;
+      sold += purchase.Amount;
+    });
+
+    res
+      .status(200)
+      .json({ profit: money, soldTickets: sold, ticketsLeft: totalTickets });
+  } catch (e) {
+    next(e);
+  }
+};
