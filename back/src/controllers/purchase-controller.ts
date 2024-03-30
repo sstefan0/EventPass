@@ -146,3 +146,39 @@ export const exportAsPdfController = async (
     next(e);
   }
 };
+
+export const getPurchaseHistoryController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.user.id;
+
+    const purchases = await prisma.purchase.findMany({
+      where: { userId: userId },
+      include: {
+        Ticket: {
+          select: {
+            Event: { select: { Title: true, DateTime: true } },
+            Ticket: { select: { Title: true } },
+          },
+        },
+      },
+    });
+    purchases.map((purchase) => ({
+      Id: purchase.Id,
+      Amount: purchase.Amount,
+      Price: purchase.Price,
+      Validated: purchase.Validated,
+      Event: purchase.Ticket.Event.Title,
+      EventDate: purchase.Ticket.Event.DateTime,
+      TicketType: purchase.Ticket.Ticket.Title,
+      PurchasedAt: purchase.purchasedAt,
+    }));
+
+    res.status(200).json(purchases);
+  } catch (e) {
+    next(e);
+  }
+};

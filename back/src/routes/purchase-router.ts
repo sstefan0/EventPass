@@ -1,6 +1,7 @@
 import express from "express";
 import {
   exportAsPdfController,
+  getPurchaseHistoryController,
   purchaseTicketsController,
   validateTicketController,
 } from "../controllers/purchase-controller";
@@ -28,9 +29,10 @@ router.put(
 );
 router.get(
   "/pdf",
-  // authorize([Role.USER]),
+  authorize([Role.USER]),
   validate(validateTicketSchema),
   exportAsPdfController
 );
+router.get("/history", authorize([Role.USER]), getPurchaseHistoryController);
 
 export default router;

@@ -14,6 +14,7 @@ import {
   deleteEventController,
   deleteTicketController,
   getEventByIdController,
+  getEventStatisticsController,
   getEventsController,
   updateEventController,
 } from "../controllers/event-controller";
@@ -68,6 +69,12 @@ router.get(
   authorize([]),
   validate(getEventByIdSchema),
   getEventByIdController
+);
+router.get(
+  "/statistics",
+  authorize([Role.ORGANIZER]),
+  validate(getEventByIdSchema),
+  getEventStatisticsController
 );
 
 export default router;
