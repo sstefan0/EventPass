@@ -1,14 +1,16 @@
 import { Request, Response, NextFunction, response } from "express";
-import { RegisterDto } from "../dto/RegisterDto";
 import { prisma } from "../util/prisma-client";
 import bcrypt from "bcrypt";
 import HttpException from "../util/http-exception";
-import { LoginDto } from "../dto/LoginDto";
 import jwt from "jsonwebtoken";
-import { ForgotPasswordDto } from "../dto/forgotPasswordDto";
-import { generateHTMLMessage, sendEmail } from "../util/mail-sender";
+import { generateHTMLResetMessage, sendEmail } from "../util/mail-sender";
 import crypto from "crypto";
-import { ResetPasswordDto } from "../dto/resetPasswordDto";
+import {
+  ForgotPasswordDto,
+  LoginDto,
+  RegisterDto,
+  ResetPasswordDto,
+} from "../dto/auth-dto";
 
 export const loginController = async (
   req: Request,
@@ -104,7 +106,7 @@ export const forgotPasswordController = async (
       from: "eventpass0@gmail.com",
       to: user.Email,
       subject: "test",
-      html: generateHTMLMessage(user.FirstName, resetToken),
+      html: generateHTMLResetMessage(user.FirstName, resetToken),
     });
     console.log(req.user);
     res.status(200).json({

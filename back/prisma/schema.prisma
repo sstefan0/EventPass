@@ -75,6 +75,8 @@ model Purchase {
   Price         Float
   userId        String
   eventTicketId String
+  Validated     Boolean     @default(false)
+  purchasedAt   DateTime    @default(now())
 }
 
 enum Role {

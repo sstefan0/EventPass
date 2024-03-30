@@ -4,6 +4,7 @@ import ErrorHandler from "./middleware/error-handler";
 import swaggerUi from "swagger-ui-express";
 import eventRouter from "./routes/event-router";
 import bodyParser from "body-parser";
+import purchaseRouter from "./routes/purchase-router";
 
 const app = express();
 const port = process.env.PORT;
@@ -23,6 +24,7 @@ app.use(
 
 app.use("/auth", authRouter);
 app.use("/event", eventRouter);
+app.use("/purchase", purchaseRouter);
 
 app.use(ErrorHandler);
 

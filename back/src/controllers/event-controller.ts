@@ -1,13 +1,15 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateEventDto } from "../dto/createEventDto";
 import { prisma } from "../util/prisma-client";
-import { AddTicketsDto } from "../dto/addTicketsDto";
 import HttpException from "../util/http-exception";
-import { UpdateEventDto } from "../dto/editEventDto";
-import { DeleteDto } from "../dto/deleteDto";
-import { GetEventsDto } from "../dto/getEventsDto";
 import { CountryCode } from "@prisma/client";
-import { GetEventDto } from "../dto/getEventDto";
+import {
+  AddTicketsDto,
+  DeleteDto,
+  CreateEventDto,
+  GetEventDto,
+  GetEventsDto,
+  UpdateEventDto,
+} from "../dto/event-dto";
 
 export const createEventController = async (
   req: Request,
