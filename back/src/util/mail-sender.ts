@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
+import { number } from "yup";
+import { generateQRCode } from "./qr-generator";
 
 export interface EmailOptions {
   from: string;
@@ -7,6 +9,12 @@ export interface EmailOptions {
   subject: string;
   text?: string;
   html?: string;
+  attachments?: {
+    filename: string;
+    content: string | undefined;
+    encoding: string;
+    cid: string;
+  }[];
 }
 
 const OAuth2 = google.auth.OAuth2;
@@ -47,8 +55,10 @@ export const sendEmail = async (emailOptions: EmailOptions) => {
   return await emailTransporter.sendMail(emailOptions);
 };
 
-export const generateHTMLMessage = (name: string, token: string): string => {
-  console.log(token);
+export const generateHTMLResetMessage = (
+  name: string,
+  token: string
+): string => {
   return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -96,4 +106,75 @@ export const generateHTMLMessage = (name: string, token: string): string => {
     </body>
     </html>
     `;
+};
+
+export const generateHTMLConfirmationMessage = async (
+  eventTitle: string,
+  eventLocation: string,
+  eventDate: string,
+  price: number,
+  dateTime: string,
+  ticketType: string,
+  noOfPeople: number
+) => {
+  return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>QR Code Email</title>
+    </head>
+    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
+      <div style="max-width: 600px; margin: auto; padding: 20px;">
+        <h2 style="text-align: center;">Ticket purchase confirmation</h2>
+        <h3 style="text-align: center;>Event info:</h3>
+        <p style="text-align: center;">Event: ${eventTitle}<br>Ticket type: ${ticketType}<br>For: ${noOfPeople} ${
+    +noOfPeople < 2 ? "person" : "people"
+  }<br>Location: ${eventLocation}<br>Date: ${eventDate}<br>Price: ${
+    price + " KM"
+  }<br>Purchase time: ${dateTime}</p>
+        <p style="text-align: center;">Please scan the QR code below to validate your ticket:</p>
+        <div style="text-align: center;">
+          <img src="cid:qrCodeImage" alt="QR Code" style="display: block; margin: 0 auto;">
+        </div>
+      </div>
+    </body>
+    </html>`;
+};
+
+export const generatePdfHTML = async (
+  ticketId: string,
+  eventTitle: string,
+  eventLocation: string,
+  eventDate: string,
+  price: number,
+  dateTime: string,
+  ticketType: string,
+  noOfPeople: number
+) => {
+  return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>QR Code Email</title>
+    </head>
+    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
+      <div style="max-width: 600px; margin: auto; padding: 20px;">
+        <h2 style="text-align: center;">Ticket purchase confirmation</h2>
+        <h3 style="text-align: center;>Event info:</h3>
+        <p style="text-align: center;">Event: ${eventTitle}<br>Ticket type: ${ticketType}<br>For: ${noOfPeople} ${
+    +noOfPeople < 2 ? "person" : "people"
+  }<br>Location: ${eventLocation}<br>Date: ${eventDate}<br>Price: ${
+    price + " KM"
+  }<br>Purchase time: ${dateTime}</p>
+        <p style="text-align: center;">Please scan the QR code below to validate your ticket:</p>
+        <div style="text-align: center;">
+          <img src="${await generateQRCode(
+            ticketId
+          )}" alt="QR Code" style="display: block; margin: 0 auto;">
+        </div>
+      </div>
+    </body>
+    </html>`;
 };
