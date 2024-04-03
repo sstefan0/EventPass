@@ -17,9 +17,11 @@ import {
   getEventStatisticsController,
   getEventsController,
   updateEventController,
+  uploadImageController,
 } from "../controllers/event-controller";
 import authorize from "../middleware/auth-middleware";
 import { Role } from "@prisma/client";
+import multer from "multer";
 
 const router = express.Router();
 
@@ -60,7 +62,7 @@ router.delete(
 
 router.get(
   "/get-all",
-  authorize([]),
+  // authorize([]),
   validate(getEventsSchema),
   getEventsController
 );
@@ -75,6 +77,12 @@ router.get(
   authorize([Role.ORGANIZER]),
   validate(getEventByIdSchema),
   getEventStatisticsController
+);
+
+router.post(
+  "/upload",
+  multer({ dest: "uploads/" }).single("image"),
+  uploadImageController
 );
 
 export default router;

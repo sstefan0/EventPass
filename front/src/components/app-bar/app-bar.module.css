@@ -1,0 +1,9 @@
+.imgLogo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+.logoContainer {
+  max-width: 10%;
+}
