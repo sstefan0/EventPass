@@ -1,0 +1,19 @@
+.eventsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  gap: 50px;
+  @media (min-width: 768px) and (max-width: 1050px) {
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+  @media (min-width: 1051px) {
+    justify-content: flex-start;
+    padding-left: 35px;
+  }
+}
+
+.event:last-child {
+  align-self: flex-start;
+}

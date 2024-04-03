@@ -5,9 +5,19 @@ import swaggerUi from "swagger-ui-express";
 import eventRouter from "./routes/event-router";
 import bodyParser from "body-parser";
 import purchaseRouter from "./routes/purchase-router";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT;
+
+app.use(cors());
+app.use(
+  cors({
+    origin: ["https://localhost:3000", "https://localhost:5173"],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());

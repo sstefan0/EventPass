@@ -1,7 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, json } from "express";
 import { prisma } from "../util/prisma-client";
 import HttpException from "../util/http-exception";
+import { google } from "googleapis";
 import { CountryCode } from "@prisma/client";
+import clientSecret from "../../client-secret.json";
 import {
   AddTicketsDto,
   DeleteDto,
@@ -10,6 +12,7 @@ import {
   GetEventsDto,
   UpdateEventDto,
 } from "../dto/event-dto";
+import fs, { PathLike } from "fs";
 
 export const createEventController = async (
   req: Request,
@@ -244,6 +247,52 @@ export const getEventStatisticsController = async (
     res
       .status(200)
       .json({ profit: money, soldTickets: sold, ticketsLeft: totalTickets });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const uploadImageController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    console.log(req.file);
+    const OAuth2 = google.auth.OAuth2;
+    const oauth2Client = new OAuth2(
+      process.env.CLIENT_ID,
+      process.env.CLIENT_SECRET,
+      "https://developers.google.com/oauthplayground"
+    );
+    new OAuth2({});
+    oauth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+
+    const accessToken = await new Promise((resolve, reject) => {
+      oauth2Client.getAccessToken((err, token) => {
+        if (err) {
+          reject("Failed to create access token.");
+        }
+        resolve(token);
+      });
+    });
+
+    const drive = google.drive({
+      version: "v3",
+      auth: oauth2Client,
+    });
+
+    const media = {
+      mimeType: req.file?.mimetype,
+      body: fs.createReadStream(req.file?.path as PathLike),
+    };
+
+    const response = await drive.files.create({
+      media: media,
+      fields: "id",
+    });
+
+    res.status(200).json({ message: "File uploaded to Google Drive." });
   } catch (e) {
     next(e);
   }

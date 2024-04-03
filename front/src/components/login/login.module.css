@@ -1,0 +1,25 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 0 auto;
+  background-color: white;
+  /* background-color: darkslategrey; */
+  padding: 3%;
+  padding-top: 1%;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  gap: 15px;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logoImage {
+  height: 20vh;
+
+  /* filter: invert(100%); */
+}
