@@ -74,17 +74,19 @@
       "Location": "Tjentiste, Foca",
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "a978f48c-01a9-4575-a3ee-d9f270c72f2a",
-      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6"
+      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1JT1sYZe6-vZbnEwLyBpgP26KxYR38bsY"
     },
     {
       "Id": "3247dd9d-808a-456d-b893-03759e007d43",
       "Title": "Ed Sheeran",
-      "Description": "Ed Sheeran će doneti svoju rekordnu + - = ÷ x turneju u Evropu 2024. godine. Evropski koncerti će biti nastavak njegove turneje po Evropi od prošle godine.",
+      "Description": "Ed Sheeran će doneti svoju rekordnu + - = ÷ x turneju u Evropu 2024. godine.Evropski koncerti će biti nastavak njegove turneje po Evropi od prošle godine. Ove vesti stižu nakon njegove rekordne turneje po Sjedinjenim Američkim Državama, gde je postavio brojne rekorde po broju posetilaca, uključujući SoFi stadion u Los Anđelesu i MetLife stadion u Nju Džersiju; ovaj drugi je bio najposećeniji jednodnevni koncert u istoriji SAD-a.Samo ove godine, Sheeran je izdao dva albuma „-” („Oduzimanje“) i „Autumn Variations“ i oba su zauzela prvo mesto širom sveta. Izdati u maju i septembru, dobili su pohvale kritičara, a Sheeran je sarađivao sa Aaronom Dessnerom iz benda The National na oba albuma.",
       "DateTime": "2024-08-17T20:00:00z",
       "Location": "Beograd, Ušće",
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
-      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6"
+      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1D6-2c_IW_5uP-QWPWJQ8qyJgJi7h-8Bh&sz=w1000"
     }
   ],
   "eventTickets": [

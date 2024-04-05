@@ -13,6 +13,8 @@ import {
   UpdateEventDto,
 } from "../dto/event-dto";
 import fs, { PathLike } from "fs";
+import { randomUUID } from "crypto";
+import { generateImageUrl } from "../util/generate-image-url";
 
 export const createEventController = async (
   req: Request,
@@ -175,6 +177,7 @@ export const getEventByIdController = async (
         Description: true,
         DateTime: true,
         Location: true,
+        ImageUrl: true,
         City: {
           select: {
             Name: true,
@@ -188,6 +191,7 @@ export const getEventByIdController = async (
       where: { EventId: eventId },
       select: {
         Ticket: { select: { Title: true } },
+        Id: true,
         Description: true,
         Price: true,
         Amount: true,
@@ -195,6 +199,7 @@ export const getEventByIdController = async (
     });
 
     const formattedTickets = tickets.map((ticket) => ({
+      id: ticket.Id,
       title: ticket.Ticket.Title,
       description: ticket.Description,
       price: ticket.Price,
@@ -209,6 +214,7 @@ export const getEventByIdController = async (
       city: event?.City.Name,
       country: event?.City.Country,
       tickets: formattedTickets,
+      imageUrl: event?.ImageUrl,
     };
 
     res.status(200).json(resData);
@@ -258,7 +264,6 @@ export const uploadImageController = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.file);
     const OAuth2 = google.auth.OAuth2;
     const oauth2Client = new OAuth2(
       process.env.CLIENT_ID,
@@ -282,17 +287,23 @@ export const uploadImageController = async (
       auth: oauth2Client,
     });
 
+    const fileMetadata = {
+      name: randomUUID(),
+      parents: ["1bW4fGjItZOr_NU4HNVEczzwhOreLw8Mq"],
+    };
     const media = {
       mimeType: req.file?.mimetype,
       body: fs.createReadStream(req.file?.path as PathLike),
     };
 
     const response = await drive.files.create({
+      requestBody: fileMetadata,
       media: media,
       fields: "id",
     });
 
-    res.status(200).json({ message: "File uploaded to Google Drive." });
+    const url = generateImageUrl(response.data.id!);
+    res.status(200).json({ imageUrl: url });
   } catch (e) {
     next(e);
   }

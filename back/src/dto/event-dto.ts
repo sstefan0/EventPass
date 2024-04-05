@@ -13,6 +13,7 @@ export interface CreateEventDto {
   Location: string;
   cityId: string;
   eventTypeId: string;
+  ImageUrl: string;
 }
 
 export interface DeleteDto {
@@ -26,6 +27,7 @@ export interface UpdateEventDto {
   DateTime: Date;
   Location: string;
   cityId: string;
+  ImageUrl: string;
 }
 
 export interface GetEventDto {

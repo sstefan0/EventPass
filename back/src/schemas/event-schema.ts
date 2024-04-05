@@ -7,6 +7,7 @@ export const createEventSchema = yup.object({
     DateTime: yup.date().required(),
     Location: yup.string().required(),
     cityId: yup.string().required(),
+    ImageUrl: yup.string().url().required(),
   }),
 });
 
@@ -29,6 +30,7 @@ export const updateEventSchema = yup.object({
     DateTime: yup.date(),
     Location: yup.string(),
     cityId: yup.string(),
+    ImageUrl: yup.string().url(),
   }),
 });
 

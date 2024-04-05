@@ -1,12 +1,10 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
 import AppBar from "./components/app-bar/app-bar";
-import { Outlet } from "react-router-dom";
 import useAuth from "./hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-import EventCardList from "./components/event-card-list/event-card-list";
-
+import { Outlet } from "react-router-dom";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -36,7 +34,7 @@ function App() {
           <AppBar userData={userData} onLogout={handleLogout} />
         </header>
         <main>
-          <EventCardList />
+          <Outlet></Outlet>
         </main>
       </>
     </ThemeProvider>

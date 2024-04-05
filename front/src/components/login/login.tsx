@@ -26,7 +26,7 @@ const Login = () => {
 
         localStorage.setItem("accessToken", accessToken);
 
-        navigate("/");
+        navigate("/events");
       } else if (response.status === 401) {
         setWrongPassword(true);
         setNotFound(false);
