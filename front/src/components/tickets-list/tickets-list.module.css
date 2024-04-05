@@ -1,0 +1,11 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80%;
+  overflow: auto;
+  @media (min-width: 786px) {
+    width: 38%;
+  }
+}

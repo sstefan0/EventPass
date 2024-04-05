@@ -108,7 +108,6 @@ export const forgotPasswordController = async (
       subject: "test",
       html: generateHTMLResetMessage(user.FirstName, resetToken),
     });
-    console.log(req.user);
     res.status(200).json({
       message: "Check your email for further details.\n",
     });

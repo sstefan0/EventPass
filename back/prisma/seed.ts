@@ -16,6 +16,7 @@ async function main() {
   const deleteTicketTypes = prisma.ticketType.deleteMany();
   const deleteCities = prisma.city.deleteMany();
   const deleteEventTypes = prisma.eventType.deleteMany();
+  await prisma.purchase.deleteMany();
 
   await Promise.all([
     deleteUsers,

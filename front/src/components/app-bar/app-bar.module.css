@@ -1,8 +1,5 @@
 .imgLogo {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: auto;
+  height: 10vh;
 }
 .logoContainer {
   max-width: 10%;

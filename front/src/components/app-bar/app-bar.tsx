@@ -56,7 +56,7 @@ function ResponsiveAppBar({
       position="static"
       style={{
         width: "100%",
-        backgroundColor: "darkslategrey",
+        backgroundColor: "#90caf980",
       }}
     >
       <Container>

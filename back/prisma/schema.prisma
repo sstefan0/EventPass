@@ -34,6 +34,7 @@ model Event {
   cityId      String
   Type        EventType     @relation(fields: [eventTypeId], references: [Id], onDelete: Cascade)
   eventTypeId String
+  ImageUrl    String        @default("https://gigstix.ba/wp-content/uploads/2024/01/Ok-fest-2024_banner_820x312.jpg")
 }
 
 model EventType {

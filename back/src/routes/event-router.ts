@@ -60,18 +60,8 @@ router.delete(
   deleteTicketController
 );
 
-router.get(
-  "/get-all",
-  // authorize([]),
-  validate(getEventsSchema),
-  getEventsController
-);
-router.get(
-  "/get-by-id",
-  authorize([]),
-  validate(getEventByIdSchema),
-  getEventByIdController
-);
+router.get("/get-all", validate(getEventsSchema), getEventsController);
+router.get("/get-by-id", validate(getEventByIdSchema), getEventByIdController);
 router.get(
   "/statistics",
   authorize([Role.ORGANIZER]),
