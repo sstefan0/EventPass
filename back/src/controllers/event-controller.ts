@@ -144,6 +144,9 @@ export const getEventsController = async (
             gte: reqParams.startDate,
           },
         },
+        include: {
+          City: { select: { Country: true } },
+        },
       });
       res.status(200).json(events);
     }
@@ -154,6 +157,9 @@ export const getEventsController = async (
           lte: reqParams.endDate,
           gte: reqParams.startDate,
         },
+      },
+      include: {
+        City: { select: { Country: true } },
       },
     });
     res.status(200).json(events);
