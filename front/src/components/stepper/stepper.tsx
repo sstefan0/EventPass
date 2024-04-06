@@ -10,6 +10,7 @@ import styles from "./stepper.module.css";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import CheckIcon from "@mui/icons-material/Check";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const steps = [
   "Select the amount of tickets",
@@ -29,53 +30,23 @@ export default function HorizontalLinearStepper({
   price: number;
 }) {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set<number>());
   const [amount, setAmount] = React.useState(0);
   const [purchaseEnabled, setPurchaseEnabled] = React.useState(true);
   const [purchaseId, setPurchaseId] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isError, setError] = React.useState(false);
 
   const isStepOptional = (step: number) => {
     return step === 6;
   };
 
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
-
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   const handlePurchase = async () => {
@@ -95,6 +66,9 @@ export default function HorizontalLinearStepper({
       setPurchaseEnabled(false);
       const resData = await response.json();
       setPurchaseId(resData.Id);
+    } else {
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -160,11 +134,19 @@ export default function HorizontalLinearStepper({
                   fullWidth
                   color="primary"
                   onClick={handlePurchase}
-                  disabled={isLoading}
+                  disabled={isLoading || isError}
                 >
                   Buy
                 </Button>
                 {isLoading && <CircularProgress sx={{ alignSelf: "center" }} />}
+                {isError && (
+                  <Typography color={"red"}>
+                    <span className={styles.info}>
+                      <ErrorOutlineIcon />
+                      An error occured, please try again.
+                    </span>
+                  </Typography>
+                )}
               </>
             ) : (
               <>
@@ -218,9 +200,7 @@ export default function HorizontalLinearStepper({
               <Typography variant="caption">Optional</Typography>
             );
           }
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
+
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
@@ -244,15 +224,7 @@ export default function HorizontalLinearStepper({
               Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button
-                color="inherit"
-                onClick={handleSkip}
-                sx={{ mr: 1, position: "absolute", bottom: 5, right: "50%" }}
-              >
-                Skip
-              </Button>
-            )}
+
             {activeStep < steps.length - 1 && (
               <Button
                 onClick={handleNext}

@@ -26,3 +26,11 @@
   color: #ff2525;
   border-bottom: 1px solid #90caf9;
 }
+
+.info {
+  display: flex;
+  align-items: flex-end;
+  padding: 5px;
+  gap: 5px;
+  justify-content: center;
+}

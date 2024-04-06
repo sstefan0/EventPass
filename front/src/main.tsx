@@ -11,6 +11,7 @@ import { loader as eventsLoader } from "./components/event-card-list/event-card-
 import EventCardList from "./components/event-card-list/event-card-list";
 import LoginPage from "./pages/login/login";
 import EventPage from "./pages/event/event-page";
+import FilterPanel from "./components/filters/filters";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/filters",
+    element: <FilterPanel />,
   },
 ]);
 
