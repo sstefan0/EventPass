@@ -50,7 +50,6 @@ function ResponsiveAppBar({
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
   return (
     <AppBar
       position="static"
@@ -135,15 +134,26 @@ function ResponsiveAppBar({
                 <Avatar alt={userData!.name} src="asd" />
               </IconButton>
             ) : (
-              <Link to={"/login"}>
-                {" "}
-                <Button
-                  key="login"
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  Login
-                </Button>
-              </Link>
+              <div className={styles.row}>
+                <Link to={"/login"}>
+                  {" "}
+                  <Button
+                    key="login"
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link to={"/register"}>
+                  {" "}
+                  <Button
+                    key="register"
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </div>
             )}
 
             {/* </Tooltip> */}

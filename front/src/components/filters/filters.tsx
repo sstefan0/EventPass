@@ -33,34 +33,34 @@ const Filters = (props: any) => {
         className={`${styles.filtersDiv} ${isVisible ? styles.visible : ""}`}
       >
         <div>
-          <InputLabel id="country-label">Country</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
+          <TextField
             id="demo-simple-select"
+            label="Country"
             fullWidth
             onChange={props.onCountry}
             variant="outlined"
             defaultValue={""}
             value={props.country}
+            select
           >
             <MenuItem value={""}>Any Country</MenuItem>
             <MenuItem value={"SRB"}>Serbia</MenuItem>
             <MenuItem value={"BIH"}>Bosnia & Herzegovina</MenuItem>
             <MenuItem value={"CRO"}>Croatia</MenuItem>
             <MenuItem value={"MNE"}>Montenegro</MenuItem>
-          </Select>
+          </TextField>
         </div>
 
         <div>
-          <InputLabel id="city-label">City</InputLabel>
-          <Select
-            labelId="city"
+          <TextField
             id="city-select"
+            label="City"
             fullWidth
             variant="outlined"
             value={props.city}
             defaultValue=""
             onChange={props.onCity}
+            select
           >
             {props.cities.length ? (
               props.cities.map((city: any) => (
@@ -71,7 +71,7 @@ const Filters = (props: any) => {
             ) : (
               <MenuItem value={""}>Select a country first</MenuItem>
             )}
-          </Select>
+          </TextField>
         </div>
         <div>
           <InputLabel htmlFor="Date_From">Date From</InputLabel>

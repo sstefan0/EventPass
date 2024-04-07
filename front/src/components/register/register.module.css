@@ -21,8 +21,9 @@
 .logoImage {
   height: 20vh;
 }
-
-.recommended {
-  text-decoration: underline red;
-  transition: text-decoration 0.3s ease-in-out;
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

@@ -98,7 +98,7 @@ export const generateHTMLResetMessage = (
         <h1>Password Reset</h1>
         <p>Hello, ${name}</p>
         <p>We received a request to reset your password. Click the button below to reset your password.</p>
-        <p><a href="https://www.google.com/${token}" class="button">Reset Password</a></p>
+        <p><a href="http://localhost:5173/resetPassword/${token}" class="button">Reset Password</a></p>
         <p>If you didn't request a password reset, you can safely ignore this email.</p>
         <p>Thank you,</p>
         <p>EventPass</p>

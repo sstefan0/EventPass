@@ -4,3 +4,6 @@
 .logoContainer {
   max-width: 10%;
 }
+.row {
+  display: flex;
+}

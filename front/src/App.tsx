@@ -5,6 +5,8 @@ import useAuth from "./hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "./redux/user/user-slice";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -13,20 +15,20 @@ const darkTheme = createTheme({
 
 function App() {
   const [userData, setUserData] = useState(null);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    dispatch(logout());
     setUserData(null);
   };
 
   const auth = useAuth();
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    console.log(token);
     if (token) setUserData(jwtDecode(token));
   }, [auth]);
 
-  console.log(userData);
   return (
     <ThemeProvider theme={darkTheme}>
       <>

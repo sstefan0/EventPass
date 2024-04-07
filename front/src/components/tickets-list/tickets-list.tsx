@@ -1,6 +1,5 @@
 import Ticket from "../ticket/ticket";
 import styles from "./tickets-list.module.css";
-import Modal from "../modal/modal";
 
 const TicketsList = ({
   ticketsList,

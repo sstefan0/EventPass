@@ -19,22 +19,22 @@ const EventDetails = ({ eventData }: { eventData: EventData }) => {
       </div>
       <Paper elevation={10}>
         <div className={styles.descriptionDiv}>
-          <Typography variant="body2" color="text.secondary">
-            <span className={styles.info}>
-              <Typography variant="body2" color="#90caf9">
-                <FmdGoodOutlined className={styles.icon} />
-              </Typography>
+          <span className={styles.info}>
+            <Typography variant="body2" color="#90caf9">
+              <FmdGoodOutlined className={styles.icon} />
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
               {eventData.location}
-            </span>
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            <span className={styles.info}>
-              <Typography variant="body2" color="#90caf9">
-                <AccessTimeOutlined />{" "}
-              </Typography>
+            </Typography>
+          </span>
+          <span className={styles.info}>
+            <Typography variant="body2" color="#90caf9">
+              <AccessTimeOutlined />{" "}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
               {new Date(eventData.dateTime).toLocaleString()}
-            </span>
-          </Typography>
+            </Typography>
+          </span>
           <p>{eventData.description}</p>
         </div>
       </Paper>
