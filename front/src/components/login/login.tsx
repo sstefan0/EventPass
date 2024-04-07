@@ -2,6 +2,8 @@ import { TextField, Button } from "@mui/material";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/user/user-slice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +11,8 @@ const Login = () => {
   const [wrongPassword, setWrongPassword] = useState(false);
   const [notFound, setNotFound] = useState(false);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +29,7 @@ const Login = () => {
         const accessToken = data.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
+        dispatch(login());
 
         navigate("/events");
       } else if (response.status === 401) {
@@ -73,6 +78,18 @@ const Login = () => {
         >
           Sign In
         </Button>
+        <a
+          href="http://localhost:5173/register"
+          className={notFound ? styles.recommended : ""}
+        >
+          Don't have an account? Register
+        </a>
+        <a
+          href="http://localhost:5173/forgotPassword"
+          className={wrongPassword ? styles.recommended : ""}
+        >
+          Forgot your password?
+        </a>
       </form>
     </div>
   );

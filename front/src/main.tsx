@@ -11,14 +11,19 @@ import { loader as eventsLoader } from "./components/event-card-list/event-card-
 import EventCardList from "./components/event-card-list/event-card-list";
 import LoginPage from "./pages/login/login";
 import EventPage from "./pages/event/event-page";
-import FilterPanel from "./components/filters/filters";
+import { RegisterPage } from "./pages/register/register";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import ForgotPasswordPage from "./pages/forgot-password/forgot-password";
+import ResetPassword from "./components/reset-password/reset-password";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+
     children: [
-      { path: "/events", element: <EventCardList />, loader: eventsLoader },
+      { path: "/", element: <EventCardList />, loader: eventsLoader },
       {
         path: "/event/:id",
         element: <EventPage />,
@@ -43,13 +48,23 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/filters",
-    element: <FilterPanel />,
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "/forgotPassword",
+    element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/resetPassword/:token",
+    element: <ResetPassword />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
