@@ -11,6 +11,7 @@ import {
   GetEventDto,
   GetEventsDto,
   UpdateEventDto,
+  DeleteTicketsDto,
 } from "../dto/event-dto";
 import fs, { PathLike } from "fs";
 import { randomUUID } from "crypto";
@@ -23,9 +24,9 @@ export const createEventController = async (
 ) => {
   try {
     const eventData = req.body as CreateEventDto;
-    console.log(req.user);
+    console.log((req as any).user);
     const event = await prisma.event.create({
-      data: { ...eventData, userId: req.user.id },
+      data: { ...eventData, userId: (req as any).user.id },
     });
 
     res.status(201).json(event);
@@ -46,7 +47,7 @@ export const addEvenTicketsController = async (
     });
 
     if (!event) throw new HttpException(404, "Event not found.");
-    if (event.userId != req.user.id)
+    if (event.userId != (req as any).user.id)
       throw new HttpException(403, "You can not update this event");
 
     const eventTickets = await prisma.eventTicket.createMany({
@@ -68,7 +69,7 @@ export const updateEventController = async (
     const newData = req.body as UpdateEventDto;
     const event = await prisma.event.findFirst({ where: { Id: newData.Id } });
     if (!event) throw new HttpException(404, "Event not found");
-    if (event.userId != req.user.id)
+    if (event.userId != (req as any).user.id)
       throw new HttpException(
         401,
         "You do not have permission to update this event"
@@ -108,9 +109,11 @@ export const deleteTicketController = async (
   next: NextFunction
 ) => {
   try {
-    const ticketId = (req.query as unknown as DeleteDto).id;
-    const deletedTicket = await prisma.eventTicket.delete({
-      where: { Id: ticketId },
+    console.log(req.body);
+    const ticketIds = req.body as DeleteTicketsDto;
+    console.log(ticketIds);
+    const deletedTicket = await prisma.eventTicket.deleteMany({
+      where: { Id: { in: ticketIds.tickets } },
     });
     res.status(200).json(deletedTicket);
   } catch (e) {
@@ -124,45 +127,26 @@ export const getEventsController = async (
   next: NextFunction
 ) => {
   try {
-    const reqParams = req.body as GetEventsDto;
-    let events;
-    let searchParams: any = {};
-    if (!reqParams.startDate && !reqParams.endDate) {
-      reqParams.startDate = new Date();
-      reqParams.endDate = new Date("2124-01-01T00:00:00z");
-    }
-    if (reqParams.eventTypeId) searchParams.eventTypeId = reqParams.eventTypeId;
-
-    if (reqParams.cityId) searchParams.cityId = reqParams.cityId;
-    else if (reqParams.countryCode) {
-      events = await prisma.event.findMany({
-        where: {
-          ...searchParams,
-          City: { Country: reqParams.countryCode as CountryCode },
-          DateTime: {
-            lte: reqParams.endDate,
-            gte: reqParams.startDate,
-          },
-        },
+    const reqParams = req.query as unknown as GetEventsDto;
+    console.log(reqParams);
+    if (reqParams.id) {
+      console.log("daaa");
+      const events = await prisma.event.findMany({
+        where: { eventTypeId: reqParams.id },
         include: {
           City: { select: { Country: true } },
         },
+        orderBy: { DateTime: "asc" },
+      });
+      console.log(events.length);
+      res.status(200).json(events);
+    } else {
+      const events = await prisma.event.findMany({
+        include: { City: { select: { Country: true } } },
+        orderBy: { DateTime: "asc" },
       });
       res.status(200).json(events);
     }
-    events = await prisma.event.findMany({
-      where: {
-        ...searchParams,
-        DateTime: {
-          lte: reqParams.endDate,
-          gte: reqParams.startDate,
-        },
-      },
-      include: {
-        City: { select: { Country: true } },
-      },
-    });
-    res.status(200).json(events);
   } catch (e) {
     next(e);
   }
@@ -184,8 +168,10 @@ export const getEventByIdController = async (
         DateTime: true,
         Location: true,
         ImageUrl: true,
+        eventTypeId: true,
         City: {
           select: {
+            Id: true,
             Name: true,
             Country: true,
           },
@@ -202,6 +188,7 @@ export const getEventByIdController = async (
         Price: true,
         Amount: true,
       },
+      orderBy: { Price: "asc" },
     });
 
     const formattedTickets = tickets.map((ticket) => ({
@@ -213,14 +200,17 @@ export const getEventByIdController = async (
     }));
 
     const resData = {
+      id: eventId,
       title: event?.Title,
       description: event?.Description,
       dateTime: event?.DateTime,
       location: event?.Location,
       city: event?.City.Name,
+      cityId: event?.City.Id,
       country: event?.City.Country,
       tickets: formattedTickets,
       imageUrl: event?.ImageUrl,
+      eventTypeId: event?.eventTypeId,
     };
 
     res.status(200).json(resData);
@@ -264,6 +254,22 @@ export const getEventStatisticsController = async (
   }
 };
 
+export const getEventsByOrganizerIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const events = await prisma.event.findMany({
+      where: { userId: (req as any).user.id },
+    });
+
+    res.status(200).json(events);
+  } catch (e) {
+    next(e);
+  }
+};
+
 export const uploadImageController = async (
   req: Request,
   res: Response,
@@ -298,8 +304,8 @@ export const uploadImageController = async (
       parents: ["1bW4fGjItZOr_NU4HNVEczzwhOreLw8Mq"],
     };
     const media = {
-      mimeType: req.file?.mimetype,
-      body: fs.createReadStream(req.file?.path as PathLike),
+      mimeType: (req as any).file?.mimetype,
+      body: fs.createReadStream((req as any).file?.path as PathLike),
     };
 
     const response = await drive.files.create({
@@ -310,6 +316,32 @@ export const uploadImageController = async (
 
     const url = generateImageUrl(response.data.id!);
     res.status(200).json({ imageUrl: url });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const getEventTypesController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const data = await prisma.eventType.findMany();
+    res.status(200).json(data);
+  } catch (e) {
+    next(e);
+  }
+};
+export const getTicketTypesController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const data = await prisma.ticketType.findMany();
+
+    res.status(200).json(data);
   } catch (e) {
     next(e);
   }

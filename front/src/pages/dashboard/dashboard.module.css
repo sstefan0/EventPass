@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-wrap: wrap;
+  padding-top: 1%;
+  row-gap: 5px;
+  /* gap: 5px; */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 5px;
+  @media (min-width: 1080px) {
+    width: 25%;
+  }
+  @media (min-width: 768px) and (max-width: 1079px) {
+    width: 40%;
+  }
+}

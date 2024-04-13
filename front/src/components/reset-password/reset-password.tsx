@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import callApi from "../../api/api";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -16,16 +17,11 @@ const ResetPassword = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await fetch("http://localhost:3000/auth/resetPassword", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ password, token }),
-    });
-
-    if (response.ok) {
+    try {
+      await callApi.Auth.resetPassword({ password, token });
       setIsLoading(false);
       setSuccess(true);
-    } else {
+    } catch (error) {
       setIsLoading(false);
       setError(true);
     }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
+import callApi from "../../api/api";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -13,16 +14,12 @@ const ForgotPassword = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await fetch("http://localhost:3000/auth/forgotPassword", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
 
-    if (response.ok) {
+    try {
+      await callApi.Auth.forgotPassword({ email });
       setIsLoading(false);
       setSuccess(true);
-    } else if (response.status == 404) {
+    } catch (error) {
       setIsLoading(false);
       setError(true);
     }

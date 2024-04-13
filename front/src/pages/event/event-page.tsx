@@ -4,11 +4,14 @@ import styles from "./event-page.module.css";
 import TicketsList from "../../components/tickets-list/tickets-list";
 
 export interface EventData {
+  id: string;
   title: string;
   description: string;
   dateTime: string;
   location: string;
   city: string;
+  cityId: string;
+  eventTypeId: string;
   country: string;
   tickets: [
     {

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid #121111;
+  /* border: 3px solid #90caf980; */
+  justify-content: center;
+  padding: 1%;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #242424;
+  color: #90caf9;
+  text-align: center;
+  height: fit-content;
+  box-sizing: border-box;
+  height: 45%;
+}

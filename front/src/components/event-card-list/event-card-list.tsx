@@ -1,9 +1,16 @@
 import EventCard from "../event-card/event-card";
 import styles from "./event-card-list.module.css";
-import { useLoaderData } from "react-router-dom";
+import {
+  useLoaderData,
+  useNavigate,
+  useParams,
+  useRevalidator,
+} from "react-router-dom";
 import Filters from "../filters/filters";
-import { SelectChangeEvent } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { Pagination, SelectChangeEvent } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import callApi from "../../api/api";
 
 interface City {
   Name: string;
@@ -12,7 +19,7 @@ interface City {
 
 const EventList = () => {
   const data: any = useLoaderData();
-  console.log(data);
+  const params = useParams();
 
   const [cities, setCities] = useState<City[]>([]);
   const [city, setCity] = useState("");
@@ -20,6 +27,26 @@ const EventList = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [displayData, setDisplayData] = useState(data);
+  const [page, setPage] = useState(1);
+  const [displayCount, setDisplayCount] = useState(6);
+  const [pagesNumber, setPagesNumber] = useState(
+    Math.ceil(data.length / displayCount)
+  );
+
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
+  useEffect(() => {
+    if (isMobile) {
+      setDisplayCount(displayData.length);
+      setPage(1);
+    } else setDisplayCount(6);
+  }, [isMobile]);
+
+  useEffect(() => {
+    setDisplayData(data);
+    setPage(1);
+    setPagesNumber(Math.ceil(data.length / displayCount));
+  }, [params.id]);
 
   const handleCityChange = (e: SelectChangeEvent<unknown>) => {
     console.log(e.target.value);
@@ -39,19 +66,11 @@ const EventList = () => {
     console.log(data);
 
     if (value != "") {
-      const response = await fetch(
-        "http://localhost:3000/cities?country=" + value,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.ok) {
-        const resData = await response.json();
-        setCities(resData);
+      try {
+        const response = await callApi.Event.cities(value);
+        setCities(response);
+      } catch (error) {
+        console.error(error);
       }
     } else {
       setCities([]);
@@ -59,9 +78,12 @@ const EventList = () => {
     }
     setCountry(value);
   };
+
+  const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   const getDisplayData = () => {
     const tempDataArray: any[] = [];
-    console.log(city, country, startDate, endDate);
     data.forEach((element: any) => {
       const eventTime = new Date(element.DateTime);
 
@@ -74,7 +96,10 @@ const EventList = () => {
         tempDataArray.push(element);
       }
     });
+
     setDisplayData(tempDataArray);
+    setPage(1);
+    setPagesNumber(Math.ceil(tempDataArray.length / 6));
   };
   const handleReset = () => {
     setCities([]);
@@ -83,21 +108,49 @@ const EventList = () => {
     setEndDate("");
     setStartDate("");
     setDisplayData(data);
+    setPage(1);
+    setPagesNumber(Math.ceil(data.length / 6));
   };
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%",
+      }}
+      key={params ? params.id : "appbardiv"}
+    >
       <ul className={styles.eventsList}>
-        {displayData.map((eventData: any) => (
-          <EventCard
-            key={eventData.Id}
-            eventName={eventData.Title}
-            eventLocation={eventData.Location}
-            eventDateTime={eventData.DateTime}
-            eventId={eventData.Id}
-            eventImage={eventData.ImageUrl}
-          />
-        ))}
+        {displayData.length !== 0 ? (
+          displayData
+            .slice(
+              (page - 1) * displayCount,
+              (page - 1) * displayCount + displayCount
+            )
+            .map((eventData: any) => (
+              <EventCard
+                key={eventData.Id}
+                eventName={eventData.Title}
+                eventLocation={eventData.Location}
+                eventDateTime={eventData.DateTime}
+                eventId={eventData.Id}
+                eventImage={eventData.ImageUrl}
+              />
+            ))
+        ) : (
+          <h1>No events in this category</h1>
+        )}
       </ul>
+      {!isMobile && (
+        <Pagination
+          count={pagesNumber}
+          onChange={handleChange}
+          page={page}
+          sx={{ position: "absolute", bottom: "5px" }}
+        />
+      )}
+
       <Filters
         onCountry={handleCountryChange}
         onCity={handleCityChange}
@@ -109,14 +162,13 @@ const EventList = () => {
         cities={cities}
         city={city}
       />
-    </>
+    </div>
   );
 };
 
 export default EventList;
 
 export const loader = async () => {
-  const response = await fetch("http://localhost:3000/event/get-all");
-  const resData = await response.json();
-  return resData;
+  const response = await callApi.Event.getAll();
+  return response;
 };

@@ -17,6 +17,7 @@ export const purchaseTicketsController = async (
 ) => {
   try {
     const purchaseData = req.body as PurchaseTicketDto;
+    console.log(purchaseData);
 
     const ticket = await prisma.eventTicket.findFirst({
       where: { Id: purchaseData.eventTicketId },
@@ -25,6 +26,7 @@ export const purchaseTicketsController = async (
       },
     });
 
+    console.log(ticket);
     if (!ticket) throw new HttpException(404, "Ticket not found.");
 
     if (ticket.Amount < purchaseData.Amount)
@@ -40,7 +42,7 @@ export const purchaseTicketsController = async (
     });
 
     const purchase = await prisma.purchase.create({
-      data: { userId: req.user.id, ...purchaseData, Price: price },
+      data: { userId: (req as any).user.id, ...purchaseData, Price: price },
       include: { Ticket: { include: { Ticket: true } } },
     });
     const code = await generateQRCode(
@@ -49,7 +51,7 @@ export const purchaseTicketsController = async (
 
     const mailOptions = {
       from: "eventpass0@gmail.com",
-      to: req.user.email,
+      to: (req as any).user.email,
       subject: "Ticket purchase receipt",
       html: await generateHTMLConfirmationMessage(
         ticket.Event.Title,
@@ -153,7 +155,7 @@ export const getPurchaseHistoryController = async (
   next: NextFunction
 ) => {
   try {
-    const userId = req.user.id;
+    const userId = (req as any).user.id;
 
     const purchases = await prisma.purchase.findMany({
       where: { userId: userId },
@@ -165,8 +167,9 @@ export const getPurchaseHistoryController = async (
           },
         },
       },
+      orderBy: { purchasedAt: "desc" },
     });
-    purchases.map((purchase) => ({
+    const purchasesFormatted = purchases.map((purchase) => ({
       Id: purchase.Id,
       Amount: purchase.Amount,
       Price: purchase.Price,
@@ -177,7 +180,7 @@ export const getPurchaseHistoryController = async (
       PurchasedAt: purchase.purchasedAt,
     }));
 
-    res.status(200).json(purchases);
+    res.status(200).json(purchasesFormatted);
   } catch (e) {
     next(e);
   }

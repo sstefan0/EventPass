@@ -18,6 +18,7 @@ export const addTicketsSchema = yup.object({
       TicketTypeId: yup.string().required(),
       Price: yup.number().positive().required(),
       Description: yup.string().nullable(),
+      Amount: yup.number().positive().required(),
     })
   ),
 });
@@ -39,14 +40,13 @@ export const deleteSchema = yup.object({
     id: yup.string().uuid().required(),
   }),
 });
+export const deleteTicketsSchema = yup.object({
+  body: yup.object({ tickets: yup.array().of(yup.string().uuid()) }),
+});
 
 export const getEventsSchema = yup.object({
-  body: yup.object({
-    startDate: yup.date().nullable(),
-    endDate: yup.date().nullable(),
-    countryCode: yup.string().oneOf(["SRB", "BIH", "CRO", "MNE"]).nullable(),
-    cityId: yup.string().uuid().nullable(),
-    eventTypeId: yup.string().uuid().nullable(),
+  query: yup.object({
+    id: yup.string().uuid().nullable(),
   }),
 });
 export const getEventByIdSchema = yup.object({

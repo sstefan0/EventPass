@@ -7,6 +7,7 @@ import {
   deleteSchema,
   getEventsSchema,
   getEventByIdSchema,
+  deleteTicketsSchema,
 } from "../schemas/event-schema";
 import {
   addEvenTicketsController,
@@ -15,13 +16,17 @@ import {
   deleteTicketController,
   getEventByIdController,
   getEventStatisticsController,
+  getEventTypesController,
+  getEventsByOrganizerIdController,
   getEventsController,
+  getTicketTypesController,
   updateEventController,
   uploadImageController,
 } from "../controllers/event-controller";
 import authorize from "../middleware/auth-middleware";
 import { Role } from "@prisma/client";
 import multer from "multer";
+import { auth } from "googleapis/build/src/apis/abusiveexperiencereport";
 
 const router = express.Router();
 
@@ -53,10 +58,10 @@ router.delete(
   deleteEventController
 );
 
-router.delete(
-  "/delete-ticket",
+router.post(
+  "/delete-tickets",
   authorize([Role.ORGANIZER]),
-  validate(deleteSchema),
+  validate(deleteTicketsSchema),
   deleteTicketController
 );
 
@@ -68,11 +73,23 @@ router.get(
   validate(getEventByIdSchema),
   getEventStatisticsController
 );
+router.get(
+  "/organizer",
+  authorize([Role.ORGANIZER]),
+  getEventsByOrganizerIdController
+);
 
 router.post(
   "/upload",
+  authorize([Role.ORGANIZER]),
   multer({ dest: "uploads/" }).single("image"),
   uploadImageController
 );
 
+router.get("/types", getEventTypesController);
 export default router;
+router.get(
+  "/ticketTypes",
+  authorize([Role.ORGANIZER]),
+  getTicketTypesController
+);
