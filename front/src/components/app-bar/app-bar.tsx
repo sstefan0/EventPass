@@ -12,7 +12,9 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import appLogo from "/logo-hd.svg";
 import styles from "./app-bar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getEventTypes } from "../../util/getEventTypes";
 
 const pages = ["Home", "Music", "Arts & Theatre", "Other"];
 
@@ -22,6 +24,12 @@ interface UserData {
   name: string;
   role: string;
 }
+
+interface EventType {
+  Id: string;
+  Title: string;
+}
+
 function ResponsiveAppBar({
   userData,
   onLogout,
@@ -29,12 +37,10 @@ function ResponsiveAppBar({
   userData: UserData | null;
   onLogout: React.MouseEventHandler;
 }) {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [menuItems, setMenuItems] = useState<EventType[]>([]);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -50,6 +56,14 @@ function ResponsiveAppBar({
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getEventTypes();
+      setMenuItems(result);
+    };
+    fetchData();
+  }, []);
   return (
     <AppBar
       position="static"
@@ -97,7 +111,9 @@ function ResponsiveAppBar({
             </Menu>
           </Box>
           <div className={styles.logoContainer}>
-            <img src={appLogo} alt="logo" className={styles.imgLogo} />
+            <Link to="/">
+              <img src={appLogo} alt="logo" className={styles.imgLogo} />
+            </Link>
           </div>
           <Typography
             variant="h5"
@@ -115,23 +131,29 @@ function ResponsiveAppBar({
               textDecoration: "none",
             }}
           ></Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+            {menuItems.map((page) => (
+              <Link
+                to={"http://localhost:5173/category/" + page.Id}
+                key={page.Id}
               >
-                {page}
-              </Button>
+                <Button
+                  key={page.Id}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.Title}
+                </Button>
+              </Link>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             {userData ? (
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={userData!.name} src="asd" />
+                <Avatar sx={{ bgcolor: "deepskyblue", color: "white" }}>
+                  {userData.name[0]}
+                </Avatar>
               </IconButton>
             ) : (
               <div className={styles.row}>
@@ -155,8 +177,6 @@ function ResponsiveAppBar({
                 </Link>
               </div>
             )}
-
-            {/* </Tooltip> */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -173,6 +193,26 @@ function ResponsiveAppBar({
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              {userData?.role == "USER" ? (
+                <MenuItem
+                  key="profile"
+                  onClick={() => navigate("/profile")}
+                  onMouseUp={handleCloseUserMenu}
+                >
+                  <Typography textAlign="center">
+                    Profile & Purchases
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  key="profile"
+                  onClick={() => navigate("/dashboard")}
+                  onMouseUp={handleCloseUserMenu}
+                >
+                  <Typography textAlign="center">Dashboard</Typography>
+                </MenuItem>
+              )}
+
               <MenuItem
                 key="logout"
                 onClick={onLogout}

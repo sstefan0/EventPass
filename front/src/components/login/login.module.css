@@ -1,7 +1,7 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 80%;
   margin: 0 auto;
   background-color: white;
   /* background-color: darkslategrey; */
@@ -10,6 +10,12 @@
   border-radius: 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   gap: 15px;
+  @media (min-width: 1080px) {
+    width: 30%;
+  }
+  @media (min-width: 768px) and (max-width: 1079px) {
+    width: 50%;
+  }
 }
 .formContainer {
   display: flex;

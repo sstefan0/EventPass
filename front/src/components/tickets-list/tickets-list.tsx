@@ -16,16 +16,21 @@ const TicketsList = ({
 }) => {
   return (
     <div className={styles.container}>
-      {ticketsList.map((ticket) => (
-        <Ticket
-          id={ticket.id}
-          title={ticket.title}
-          amount={ticket.amount}
-          description={ticket.description}
-          price={ticket.price}
-          key={ticket.id}
-        />
-      ))}
+      {ticketsList.length ? (
+        ticketsList.map((ticket) => (
+          <Ticket
+            id={ticket.id}
+            title={ticket.title}
+            amount={ticket.amount}
+            description={ticket.description}
+            price={ticket.price}
+            key={ticket.id}
+            editing={false}
+          />
+        ))
+      ) : (
+        <h1>Tickets coming soon...</h1>
+      )}
     </div>
   );
 };

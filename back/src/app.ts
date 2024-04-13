@@ -6,6 +6,7 @@ import eventRouter from "./routes/event-router";
 import bodyParser from "body-parser";
 import purchaseRouter from "./routes/purchase-router";
 import citiesRouter from "./routes/cities-router";
+import usersRouter from "./routes/user-router";
 import cors from "cors";
 
 const app = express();
@@ -37,6 +38,7 @@ app.use("/auth", authRouter);
 app.use("/event", eventRouter);
 app.use("/purchase", purchaseRouter);
 app.use("/cities", citiesRouter);
+app.use("/user", usersRouter);
 
 app.use(ErrorHandler);
 

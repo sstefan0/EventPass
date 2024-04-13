@@ -1,23 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
 
 interface UserState {
   isLoggedIn: boolean;
+  role: string;
 }
+const accessToken = localStorage.getItem("accessToken");
 
 const initialState: UserState = {
-  isLoggedIn: localStorage.getItem("accessToken") ? true : false,
+  isLoggedIn: accessToken ? true : false,
+  role: accessToken ? (jwtDecode(accessToken) as any).role : "",
 };
 
 const userSlice = createSlice({
   name: "loggedIn",
   initialState,
   reducers: {
-    login: (state) => {
+    login: (state, action) => {
       state.isLoggedIn = true;
+      state.role = (jwtDecode(action.payload.accessToken) as any).role;
     },
     logout: (state) => {
-      console.log("dispeciraaaaj");
       state.isLoggedIn = false;
+      state.role = "";
     },
   },
 });

@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  border-radius: 15px;
+  overflow: auto;
+  height: 80vh;
+  background-color: #242424;
+  border: 5px solid #121111;
+  /* border: 3px solid #90caf980; */
+  @media (min-width: 1080px) {
+    width: 70%;
+  }
+  @media (min-width: 768px) and (max-width: 1079px) {
+    width: 55%;
+  }
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.noDataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 15px;
+  overflow: auto;
+  height: 80vh;
+  @media (min-width: 1080px) {
+    width: 70%;
+  }
+  @media (min-width: 768px) and (max-width: 1079px) {
+    width: 55%;
+  }
+}
+
+.editIcon:hover {
+  color: #90caf980;
+}
+
+.deleteIcon:hover {
+  color: rgb(169, 45, 45);
+}

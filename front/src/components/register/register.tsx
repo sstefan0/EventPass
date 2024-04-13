@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./register.module.css";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/user-slice";
+import callApi from "../../api/api";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("USER");
   const [emailUnavailable, setEmailUnavailable] = useState(false);
 
   const dispatch = useDispatch();
@@ -26,33 +27,29 @@ const Register = () => {
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/auth/register", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
+    try {
+      console.log(role);
+      const response = await callApi.Auth.register({
         firstName,
         lastName,
         email,
         phoneNumber,
         password,
         role,
-      }),
-    });
-
-    if (response.ok) {
-      const loginResponse = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email, password }),
       });
-      if (loginResponse.ok) {
-        const data = await loginResponse.json();
-        localStorage.setItem("accessToken", data.accessToken);
-        dispatch(login());
-        navigate("/events");
+
+      if (response) {
+        const loginData = await callApi.Auth.login({ email, password });
+
+        if (login) {
+          localStorage.setItem("accessToken", loginData.accessToken);
+          dispatch(login({ accessToken: loginData.accessToken }));
+          navigate("/");
+        }
       }
-    } else if (response.status == 409) {
-      setEmailUnavailable(true);
+    } catch (error: any) {
+      console.log(error);
+      if (error.response.status === 409) setEmailUnavailable(true);
     }
   };
 

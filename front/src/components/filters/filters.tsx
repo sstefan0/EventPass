@@ -1,11 +1,4 @@
-import {
-  TextField,
-  Select,
-  MenuItem,
-  Button,
-  Fab,
-  InputLabel,
-} from "@mui/material";
+import { TextField, MenuItem, Button, Fab, InputLabel } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/Filterlist";
 import { useState } from "react";
 import styles from "./filters.module.css";
@@ -18,7 +11,6 @@ const Filters = (props: any) => {
     setIsVisible(!isVisible);
   };
 
-  console.log(props.handleCountryChange);
   return (
     <>
       <Fab

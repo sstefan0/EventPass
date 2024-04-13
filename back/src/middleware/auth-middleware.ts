@@ -17,13 +17,13 @@ const authorize =
 
       const decoded = jwt.verify(token, (process.env as any).JWT_SECRET);
 
-      req.user = decoded;
+      (req as any).user = decoded;
 
       let authorized = false;
       if (!roles.length) authorized = true;
 
       roles.forEach((role) => {
-        if (role == req.user.role) authorized = true;
+        if (role == (req as any).user.role) authorized = true;
       });
 
       if (!authorized) throw new HttpException(401, "Unauthorized.");

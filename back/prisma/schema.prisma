@@ -71,7 +71,7 @@ model City {
 model Purchase {
   Id            String      @id @default(uuid())
   PurchasedBy   User        @relation(fields: [userId], references: [Id])
-  Ticket        EventTicket @relation(fields: [eventTicketId], references: [Id])
+  Ticket        EventTicket @relation(fields: [eventTicketId], references: [Id], onDelete: Cascade)
   Amount        Int
   Price         Float
   userId        String

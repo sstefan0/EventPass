@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/user-slice";
-
+import callApi from "../../api/api";
+import { AxiosError } from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,29 +19,22 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const accessToken = data.accessToken;
-
+      const response = await callApi.Auth.login({ email, password });
+      if (response) {
+        const accessToken = response.accessToken;
         localStorage.setItem("accessToken", accessToken);
-        dispatch(login());
+        dispatch(login({ accessToken }));
 
-        navigate("/events");
-      } else if (response.status === 401) {
+        navigate("/");
+      }
+    } catch (err: any) {
+      if (err.response.status === 401) {
         setWrongPassword(true);
         setNotFound(false);
-      } else if (response.status === 404) {
+      } else if (err.response.status === 404) {
         setNotFound(true);
         setWrongPassword(false);
       }
-    } catch (err) {
-      console.error("Login error", err);
     }
   };
 

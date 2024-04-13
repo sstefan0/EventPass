@@ -11,6 +11,7 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import callApi from "../../api/api";
 
 const steps = [
   "Select the amount of tickets",
@@ -23,11 +24,17 @@ export default function HorizontalLinearStepper({
   title,
   description,
   price,
+  onFinish,
+  availableAmount,
+  onPurchase,
 }: {
   ticketId: string;
   title: string;
   description: string;
   price: number;
+  onFinish: React.MouseEventHandler;
+  availableAmount: number;
+  onPurchase: (amountPurchased: number) => void;
 }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [amount, setAmount] = React.useState(0);
@@ -36,6 +43,7 @@ export default function HorizontalLinearStepper({
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isError, setError] = React.useState(false);
+  const [notEnough, setNotEnough] = React.useState(false);
 
   const isStepOptional = (step: number) => {
     return step === 6;
@@ -52,21 +60,16 @@ export default function HorizontalLinearStepper({
   const handlePurchase = async () => {
     console.log(ticketId);
     setIsLoading(true);
-    const response = await fetch("http://localhost:3000/purchase", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ eventTicketId: ticketId, Amount: amount }),
-      method: "POST",
-    });
-
-    if (response.ok) {
+    try {
+      const response = await callApi.Purchase.purchase({
+        eventTicketId: ticketId,
+        Amount: amount,
+      });
       setIsLoading(false);
       setPurchaseEnabled(false);
-      const resData = await response.json();
-      setPurchaseId(resData.Id);
-    } else {
+      onPurchase(amount);
+      setPurchaseId(response.Id);
+    } catch (error) {
       setIsLoading(false);
       setError(true);
     }
@@ -74,27 +77,22 @@ export default function HorizontalLinearStepper({
 
   const handlePdf = async () => {
     setIsLoading(true);
-    const response = await fetch(
-      "http://localhost:3000/purchase/pdf?id=" + purchaseId,
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      }
-    );
-    const blob = await response.blob();
-
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "example.pdf";
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    setIsLoading(false);
-    setIsSuccess(true);
+    try {
+      const response = await callApi.Purchase.pdf(purchaseId);
+      console.log(response);
+      const blob = new Blob([response], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ticket_${purchaseId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setIsLoading(false);
+      setIsSuccess(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const showActiveStep = (active: number) => {
     switch (active) {
@@ -105,8 +103,16 @@ export default function HorizontalLinearStepper({
               type="number"
               variant="outlined"
               label="Amount"
-              onChange={(e) => setAmount(Number(e.target.value))}
+              onChange={(e) => {
+                const selectedAmount = Number(e.target.value);
+                console.log(selectedAmount, availableAmount);
+                if (selectedAmount > availableAmount) setNotEnough(true);
+                else setNotEnough(false);
+                setAmount(Number(e.target.value));
+              }}
               sx={{ position: "absolute", top: "50%" }}
+              helperText={notEnough ? "Not enough tickets left." : ""}
+              error={notEnough}
             />
           </div>
         );
@@ -212,7 +218,6 @@ export default function HorizontalLinearStepper({
         ""
       ) : (
         <React.Fragment>
-          {/* OVDJE UBACITI KORAKE */}
           {showActiveStep(activeStep)}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
@@ -229,8 +234,17 @@ export default function HorizontalLinearStepper({
               <Button
                 onClick={handleNext}
                 sx={{ position: "absolute", bottom: 5, right: 5 }}
+                disabled={notEnough}
               >
                 Next
+              </Button>
+            )}
+            {activeStep === steps.length - 1 && (
+              <Button
+                onClick={onFinish}
+                sx={{ position: "absolute", bottom: 5, right: 5 }}
+              >
+                {purchaseEnabled ? "Cancel" : "Finish"}
               </Button>
             )}
           </Box>

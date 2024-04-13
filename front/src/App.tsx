@@ -1,7 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
 import AppBar from "./components/app-bar/app-bar";
-import useAuth from "./hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
@@ -23,11 +22,10 @@ function App() {
     setUserData(null);
   };
 
-  const auth = useAuth();
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) setUserData(jwtDecode(token));
-  }, [auth]);
+  }, [localStorage.getItem("accessToken")]);
 
   return (
     <ThemeProvider theme={darkTheme}>

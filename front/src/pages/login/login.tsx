@@ -1,17 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import Login from "../../components/login/login";
-import useAuth from "../../hooks/useAuth";
 import { useEffect } from "react";
+import { getAuth } from "../../util/get-auth";
 
 const LoginPage = () => {
-  const auth = useAuth();
   const navigate = useNavigate();
+  const user = getAuth();
 
   useEffect(() => {
-    if (auth) {
-      navigate("/");
-    }
-  }, [auth]);
+    if (user) navigate("/");
+  }, [user]);
 
   return <Login />;
 };

@@ -24,11 +24,15 @@ export default function BasicModal({
   title,
   description,
   price,
+  amount,
+  onPurchase,
 }: {
   ticketid: string;
   title: string;
   description: string;
   price: number;
+  amount: number;
+  onPurchase: (amountPurchased: number) => void;
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,6 +46,7 @@ export default function BasicModal({
         fullWidth
         color="primary"
         onClick={handleOpen}
+        disabled={!amount}
       >
         Buy
       </Button>{" "}
@@ -54,10 +59,13 @@ export default function BasicModal({
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <Stepper
+              onFinish={handleClose}
               ticketId={ticketid}
               title={title}
               description={description}
               price={price}
+              availableAmount={amount}
+              onPurchase={onPurchase}
             />
           </Typography>
         </Box>

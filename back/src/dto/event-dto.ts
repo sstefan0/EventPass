@@ -19,6 +19,9 @@ export interface CreateEventDto {
 export interface DeleteDto {
   id: string;
 }
+export interface DeleteTicketsDto {
+  tickets: string[];
+}
 
 export interface UpdateEventDto {
   Id: string;
@@ -35,9 +38,5 @@ export interface GetEventDto {
 }
 
 export interface GetEventsDto {
-  startDate: Date | null;
-  endDate: Date | null;
-  countryCode: string | null;
-  cityId: string | null;
-  eventTypeId: string | null;
+  id: string | null;
 }

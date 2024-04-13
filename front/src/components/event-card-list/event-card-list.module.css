@@ -3,13 +3,15 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px;
-  gap: 50px;
+  box-sizing: border-box;
+  gap: 10px;
+  width: 100%;
   @media (min-width: 768px) and (max-width: 1050px) {
-    justify-content: flex-start;
+    justify-content: center;
     padding-left: 10px;
   }
   @media (min-width: 1051px) {
-    justify-content: flex-start;
+    justify-content: center;
     padding-left: 35px;
   }
 }

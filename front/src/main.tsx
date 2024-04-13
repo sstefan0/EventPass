@@ -16,6 +16,13 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import ForgotPasswordPage from "./pages/forgot-password/forgot-password";
 import ResetPassword from "./components/reset-password/reset-password";
+import Profile from "./pages/profile/profile";
+import { loader as purchasesLoader } from "./pages/profile/profile";
+import { loader as userLoader } from "./components/user-info/user-info";
+import Dashboard from "./pages/dashboard/dashboard";
+import { loader as eventTableLoader } from "./components/events-table/events-table";
+import ManageEvent from "./pages/manage-event/manage-event";
+import callApi from "./api/api";
 
 const router = createBrowserRouter([
   {
@@ -25,20 +32,55 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <EventCardList />, loader: eventsLoader },
       {
+        path: "/category/:id",
+        element: <EventCardList />,
+        loader: async ({ params }) => {
+          const response = await callApi.Event.getAllCategory(params.id!);
+          return response;
+        },
+      },
+      {
         path: "/event/:id",
         element: <EventPage />,
         loader: async ({ params }) => {
-          const response = await fetch(
-            "http://localhost:3000/event/get-by-id?id=" + params.id,
-            {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("accessToken"),
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          const resData = await response.json();
-          return resData;
+          const response = await callApi.Event.getOne(params.id!);
+          return response;
+        },
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+        loader: async () => {
+          const [userData, purchases] = await Promise.all([
+            userLoader(),
+            purchasesLoader(),
+          ]);
+
+          return { userData, purchases };
+        },
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+        loader: async () => {
+          const [userData, events] = await Promise.all([
+            userLoader(),
+            eventTableLoader(),
+          ]);
+          console.log(userData);
+          return { userData, events };
+        },
+      },
+      {
+        path: "/manageEvent",
+        element: <ManageEvent />,
+      },
+      {
+        path: "/manageEvent/:id",
+        element: <ManageEvent />,
+        loader: async ({ params }) => {
+          const response = await callApi.Event.getOne(params.id!);
+          return response;
         },
       },
     ],

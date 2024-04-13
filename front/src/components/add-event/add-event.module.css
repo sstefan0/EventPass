@@ -1,0 +1,27 @@
+.eventDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+  row-gap: 20px;
+  width: 100%;
+  background-color: #242424;
+  border: 5px solid #121111;
+  border-radius: 15px;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+}
