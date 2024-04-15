@@ -28,7 +28,7 @@ const ActionAreaCard = ({
   };
   return (
     <div onClick={handleClick} className={styles.eventCard}>
-      <Card>
+      <Card sx={{ "&:hover": { background: "transparent" } }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -37,20 +37,28 @@ const ActionAreaCard = ({
             alt="green iguana"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              color="#ffffff"
+            >
               {eventName}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="#9C9583">
               <span className={styles.info}>
-                <FmdGoodOutlinedIcon className={styles.icon} color="primary" />{" "}
+                <FmdGoodOutlinedIcon
+                  className={styles.icon}
+                  sx={{ color: "#00F5D0" }}
+                />{" "}
                 {eventLocation}
               </span>
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="#9C9583">
               <span className={styles.info}>
                 <AccessTimeOutlinedIcon
                   className={styles.icon}
-                  color="primary"
+                  sx={{ color: "#00F5D0" }}
                 />{" "}
                 {new Date(eventDateTime).toLocaleString()}
               </span>

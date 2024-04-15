@@ -7,12 +7,15 @@
   box-sizing: border-box;
   /* height: 5%; */
   gap: 5px;
-  border: 5px solid #222222;
-  border-radius: 15px;
-  background-color: #444444;
+  border: 5px solid #0c0b0b;
+  /* border-bottom: 3px solid #00f5d0; */
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  /* border-radius: 15px; */
+  background-color: #242424;
 }
 .container:hover {
-  border: 2px solid #90caf980;
+  border: 2px solid #00f5d0;
   transition: border-color 0.3s ease;
 }
 .row {

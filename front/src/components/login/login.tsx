@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/user-slice";
 import callApi from "../../api/api";
 import { AxiosError } from "axios";
+import { TextFieldStyle } from "../../util/global-style";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,6 +46,7 @@ const Login = () => {
         <TextField
           label="Email"
           variant="outlined"
+          sx={TextFieldStyle}
           name="email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
@@ -57,6 +59,7 @@ const Login = () => {
           label="Password"
           variant="outlined"
           name="password"
+          sx={{ ...TextFieldStyle }}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -67,7 +70,13 @@ const Login = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
           color="info"
         >
           Sign In

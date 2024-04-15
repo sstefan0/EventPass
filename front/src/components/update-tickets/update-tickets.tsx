@@ -7,6 +7,8 @@ import { getEventTicketTypes } from "../../util/getTicketTypes";
 import { useNavigate } from "react-router-dom";
 import { EventData } from "../../pages/event/event-page";
 import callApi from "../../api/api";
+import EditIcon from "@mui/icons-material/Edit";
+import { TextFieldStyle } from "../../util/global-style";
 
 interface Ticket {
   EventId: string;
@@ -49,7 +51,6 @@ const UpdateTickets = ({
   const [createdTickets, setCreatedTickets] = useState<CreatedTicket[]>(
     eventData.tickets
   );
-  const [toDelete, setToDelete] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -67,19 +68,9 @@ const UpdateTickets = ({
     setEventTickets([...eventTickets, newTicket]);
   };
 
-  const deleteTickets = async () => {
-    try {
-      console.log(toDelete);
-      const response = await callApi.Event.deleteTickets({ tickets: toDelete });
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const handleTicketsSubmit = async () => {
     setIsLoading(true);
     try {
-      if (toDelete.length) await deleteTickets();
       if (eventTickets.length) await callApi.Event.addTickets(eventTickets);
       setIsLoading(false);
       setIsSuccess(true);
@@ -105,6 +96,7 @@ const UpdateTickets = ({
           label="Ticket Type"
           variant="outlined"
           value={ticketForm.type}
+          sx={TextFieldStyle}
           defaultValue=""
           onChange={(e) => {
             setTicketForm({ ...ticketForm, type: e.target.value });
@@ -126,6 +118,7 @@ const UpdateTickets = ({
         <div className={styles.row}>
           <TextField
             id="price"
+            sx={TextFieldStyle}
             type="number"
             fullWidth
             name="price"
@@ -138,6 +131,7 @@ const UpdateTickets = ({
           <TextField
             id="amount"
             type="number"
+            sx={TextFieldStyle}
             fullWidth
             name="amount"
             label="Amount"
@@ -152,6 +146,7 @@ const UpdateTickets = ({
           multiline
           minRows={3}
           maxRows={6}
+          sx={TextFieldStyle}
           fullWidth
           name="description"
           label="Description"
@@ -164,16 +159,27 @@ const UpdateTickets = ({
           variant="contained"
           fullWidth
           disabled={isLoading || isSuccess}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
         >
           Add Ticket
         </Button>
         <Button
           type="button"
           variant="contained"
-          disabled={
-            (!eventTickets.length || isLoading || isSuccess) &&
-            toDelete.length === 0
-          }
+          disabled={!eventTickets.length || isLoading || isSuccess}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
           fullWidth
           onClick={handleTicketsSubmit}
         >
@@ -234,19 +240,6 @@ const UpdateTickets = ({
                 key={ticket.id}
                 editing
               />
-              <div
-                onClick={() => {
-                  let array = [
-                    ...createdTickets.slice(0, index),
-                    ...createdTickets.slice(index + 1),
-                  ];
-                  setToDelete([...toDelete, ticket.id]);
-                  console.log(ticket.id, toDelete);
-                  setCreatedTickets(array);
-                }}
-              >
-                <CloseIcon className={styles.icon} />
-              </div>
             </div>
           ))}
       </div>

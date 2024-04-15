@@ -13,6 +13,7 @@ import styles from "./add-event.module.css";
 import { getEventTypes } from "../../util/getEventTypes";
 import DoneIcon from "@mui/icons-material/Done";
 import callApi from "../../api/api";
+import { TextFieldStyle } from "../../util/global-style";
 
 interface EventForm {
   title: string;
@@ -117,6 +118,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
           label="Title"
           fullWidth
           required
+          sx={TextFieldStyle}
           onChange={(e) => {
             setAddEventForm({ ...addEventForm, title: e.target.value });
           }}
@@ -126,6 +128,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
           label="Event Type"
           variant="outlined"
           value={addEventForm.type}
+          sx={TextFieldStyle}
           defaultValue=""
           onChange={(e) => {
             setAddEventForm({ ...addEventForm, type: e.target.value });
@@ -149,6 +152,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
           multiline
           minRows={3}
           maxRows={6}
+          sx={TextFieldStyle}
           fullWidth
           name="description"
           label="Description"
@@ -169,6 +173,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
             type="datetime-local"
             name="eventDate"
             required
+            sx={TextFieldStyle}
             fullWidth
             onChange={(e) => {
               setAddEventForm({ ...addEventForm, date: e.target.value });
@@ -184,6 +189,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
             defaultValue={""}
             value={addEventForm.country}
             select
+            sx={TextFieldStyle}
             required
             fullWidth
           >
@@ -198,6 +204,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
             label="City"
             variant="outlined"
             value={addEventForm.city}
+            sx={TextFieldStyle}
             defaultValue=""
             onChange={(e) => {
               console.log(e.target.value);
@@ -221,6 +228,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
         <TextField
           id="address"
           type="text"
+          sx={TextFieldStyle}
           fullWidth
           name="eventDate"
           label="Address"
@@ -233,6 +241,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
           <Input
             type="file"
             inputProps={{ accept: "image/*" }}
+            sx={TextFieldStyle}
             required
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               if (e.target.files && e.target.files.length)
@@ -245,12 +254,13 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
           <Button
             type="submit"
             variant="contained"
-            color={isSuccess ? "success" : "primary"}
+            // color={isSuccess ? "success" : ""}
+            sx={{ background: "#00F5D0", "&:hover": { background: "#00a39e" } }}
             disabled={isLoading || isSuccess}
             fullWidth
           >
             {isLoading ? (
-              <CircularProgress />
+              <CircularProgress sx={{ color: "#00F5D0" }} />
             ) : isSuccess ? (
               <DoneIcon />
             ) : (
@@ -262,7 +272,7 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
           <Slide direction="right" in mountOnEnter unmountOnExit>
             <Alert
               severity="success"
-              variant="outlined"
+              variant="filled"
               sx={{ position: "absolute", bottom: "10px" }}
             >
               Event successfuly created

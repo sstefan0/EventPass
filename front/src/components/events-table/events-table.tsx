@@ -23,8 +23,8 @@ import callApi from "../../api/api";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#90caf9",
-    color: theme.palette.common.white,
+    backgroundColor: "#010400",
+    color: "#00F5D0",
     textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
@@ -126,6 +126,16 @@ const CustomizedTables = (props: any) => {
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
+        PaperProps={{
+          style: {
+            backgroundColor: "#000000",
+            borderRadius: "0px",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            borderBottom: "3px solid #00f5d0",
+            boxShadow: "none",
+          },
+        }}
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">

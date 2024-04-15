@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { getEventTicketTypes } from "../../util/getTicketTypes";
 import { useNavigate } from "react-router-dom";
 import callApi from "../../api/api";
+import { TextFieldStyle } from "../../util/global-style";
 
 interface Ticket {
   EventId: string;
@@ -75,6 +76,7 @@ const AddTickets = ({ eventId }: { eventId: string }) => {
           variant="outlined"
           value={ticketForm.type}
           defaultValue=""
+          sx={TextFieldStyle}
           onChange={(e) => {
             setTicketForm({ ...ticketForm, type: e.target.value });
           }}
@@ -99,6 +101,7 @@ const AddTickets = ({ eventId }: { eventId: string }) => {
             fullWidth
             name="price"
             label="Price"
+            sx={TextFieldStyle}
             required
             onChange={(e) =>
               setTicketForm({ ...ticketForm, price: Number(e.target.value) })
@@ -110,6 +113,7 @@ const AddTickets = ({ eventId }: { eventId: string }) => {
             fullWidth
             name="amount"
             label="Amount"
+            sx={TextFieldStyle}
             required
             onChange={(e) =>
               setTicketForm({ ...ticketForm, amount: Number(e.target.value) })
@@ -121,6 +125,7 @@ const AddTickets = ({ eventId }: { eventId: string }) => {
           multiline
           minRows={3}
           maxRows={6}
+          sx={TextFieldStyle}
           fullWidth
           name="description"
           label="Description"
@@ -133,6 +138,13 @@ const AddTickets = ({ eventId }: { eventId: string }) => {
           variant="contained"
           fullWidth
           disabled={isLoading || isSuccess}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
         >
           Add Ticket
         </Button>
@@ -142,6 +154,13 @@ const AddTickets = ({ eventId }: { eventId: string }) => {
           disabled={!eventTickets.length || isLoading || isSuccess}
           fullWidth
           onClick={handleTicketsSubmit}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
         >
           Submit tickets
         </Button>

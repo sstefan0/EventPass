@@ -1,5 +1,12 @@
 .imgLogo {
   height: 10vh;
+  filter: invert(72%) sepia(15%) saturate(318%) hue-rotate(5deg) brightness(81%)
+    contrast(86%);
+}
+.imgLogo:hover {
+  filter: invert(85%) sepia(98%) saturate(2116%) hue-rotate(90deg)
+    brightness(95%) contrast(102%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 }
 .logoContainer {
   max-width: 10%;

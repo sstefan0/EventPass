@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import appLogo from "/logo-hd.svg";
 import styles from "./app-bar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getEventTypes } from "../../util/getEventTypes";
 
@@ -40,6 +40,7 @@ function ResponsiveAppBar({
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [menuItems, setMenuItems] = useState<EventType[]>([]);
+  const [active, setActive] = useState(-1);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -64,12 +65,18 @@ function ResponsiveAppBar({
     };
     fetchData();
   }, []);
+
+  const params = useParams();
+  console.log(params);
   return (
     <AppBar
       position="static"
       style={{
         width: "100%",
-        backgroundColor: "#90caf980",
+        backgroundColor: "#000000",
+        borderBottom: "5px solid #00F5D0",
+        borderBottomRightRadius: "15px",
+        boxSizing: "border-box",
       }}
     >
       <Container>
@@ -104,15 +111,26 @@ function ResponsiveAppBar({
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  color="#9C9583"
+                >
+                  <Typography color="#9C9583" textAlign="center">
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <div className={styles.logoContainer}>
             <Link to="/">
-              <img src={appLogo} alt="logo" className={styles.imgLogo} />
+              <img
+                src={appLogo}
+                alt="logo"
+                className={styles.imgLogo}
+                onClick={() => setActive(-1)}
+              />
             </Link>
           </div>
           <Typography
@@ -131,16 +149,39 @@ function ResponsiveAppBar({
               textDecoration: "none",
             }}
           ></Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {menuItems.map((page) => (
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex", justifyContent: "center" },
+            }}
+          >
+            {menuItems.map((page, index) => (
               <Link
                 to={"http://localhost:5173/category/" + page.Id}
                 key={page.Id}
               >
                 <Button
                   key={page.Id}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  onClick={() => {
+                    handleCloseNavMenu(), setActive(index);
+                  }}
+                  sx={{
+                    my: 2,
+                    display: "block",
+                    boxSizing: "border-box",
+                    borderBottom: "3px solid transparent",
+                    color:
+                      params.id && page.Id === params.id
+                        ? "#00F5D0"
+                        : "#9C9583",
+                    "&:hover": {
+                      borderBottom: "3px solid #00F5D0",
+                      background: "transparent",
+                      borderBottomRightRadius: "15px",
+                      color: "#00F5D0",
+                      transition: "all 0.1s slide-in",
+                    },
+                  }}
                 >
                   {page.Title}
                 </Button>
@@ -151,7 +192,7 @@ function ResponsiveAppBar({
           <Box sx={{ flexGrow: 0 }}>
             {userData ? (
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: "deepskyblue", color: "white" }}>
+                <Avatar sx={{ bgcolor: "#00F5D0", color: "black" }}>
                   {userData.name[0]}
                 </Avatar>
               </IconButton>

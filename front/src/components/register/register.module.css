@@ -3,11 +3,12 @@
   flex-direction: column;
   width: 80%;
   margin: 0 auto;
-  background-color: white;
-  /* background-color: darkslategrey; */
+  background-color: #242424;
   padding: 3%;
   padding-top: 1%;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom: 3px solid #00f5d0;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   gap: 15px;
   max-height: 100vh;
@@ -24,9 +25,14 @@
   justify-content: center;
   height: 100vh;
 }
+.formContainer a {
+  color: #2274a5;
+}
 
 .logoImage {
   height: 20vh;
+  filter: invert(95%) sepia(26%) saturate(6857%) hue-rotate(90deg)
+    brightness(96%) contrast(101%);
 }
 .row {
   display: flex;

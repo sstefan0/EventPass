@@ -37,7 +37,12 @@ const Ticket = ({
       </div>
       <div className={styles.row}>
         {editing ? (
-          <Button variant="contained" fullWidth color="primary" disabled>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ background: "#00F5D0" }}
+            disabled
+          >
             Buy
           </Button>
         ) : user === "USER" ? (

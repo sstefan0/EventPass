@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/user-slice";
 import callApi from "../../api/api";
+import { TextFieldStyle } from "../../util/global-style";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -63,6 +64,7 @@ const Register = () => {
             variant="outlined"
             name="firstName"
             type="text"
+            sx={TextFieldStyle}
             onChange={(e) => setFirstName(e.target.value)}
             required
             autoFocus
@@ -71,6 +73,7 @@ const Register = () => {
             label="Last name"
             variant="outlined"
             name="lastName"
+            sx={TextFieldStyle}
             type="text"
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -81,6 +84,7 @@ const Register = () => {
           label="Email"
           variant="outlined"
           name="email"
+          sx={TextFieldStyle}
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -96,6 +100,7 @@ const Register = () => {
         <TextField
           label="Password"
           variant="outlined"
+          sx={TextFieldStyle}
           name="password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
@@ -104,6 +109,7 @@ const Register = () => {
         <TextField
           label="Phone number"
           variant="outlined"
+          sx={TextFieldStyle}
           name="phoneNumber"
           type="text"
           onChange={(e) => setPhoneNumber(e.target.value)}
@@ -112,9 +118,9 @@ const Register = () => {
         <div className={styles.row}>
           <TextField
             label="Role"
+            sx={{ ...TextFieldStyle, width: "100%" }}
             select
             onChange={(e) => setRole(e.target.value)}
-            sx={{ width: "100%" }}
             required
             defaultValue={"USER"}
           >
@@ -135,14 +141,20 @@ const Register = () => {
             about="aaaa"
             placement="right"
           >
-            <QuestionMarkIcon color="warning" sx={{}} />
+            <QuestionMarkIcon sx={{ color: "#2274A5" }} />
           </Tooltip>
         </div>
         <Button
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
           color="info"
         >
           Register

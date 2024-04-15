@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Stepper from "../stepper/stepper";
 import styles from "./modal.module.css";
+import { BorderBottom } from "@mui/icons-material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -14,7 +15,10 @@ const style = {
   width: "30%",
   height: "50%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
+  borderTopLeftRadius: "20px",
+  borderBottomRightRadius: "20px",
+  borderBottom: "3px solid #00F5D0",
   boxShadow: 24,
   p: 4,
 };
@@ -41,6 +45,13 @@ export default function BasicModal({
   return (
     <div className={styles.container}>
       <Button
+        sx={{
+          background: "#00F5D0",
+          "&:hover": {
+            backgroundColor: "#00a39e",
+            boxShadow: "none",
+          },
+        }}
         type="submit"
         variant="contained"
         fullWidth

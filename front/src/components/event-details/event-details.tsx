@@ -17,10 +17,18 @@ const EventDetails = ({ eventData }: { eventData: EventData }) => {
           <h1 className={styles.title}>{eventData.title}</h1>
         </div>
       </div>
-      <Paper elevation={10}>
+      <Paper
+        elevation={10}
+        sx={{
+          background: "#242424",
+          borderBottom: "3px solid #00f5d0",
+          borderTopLeftRadius: "20px",
+          borderBottomRightRadius: "20px",
+        }}
+      >
         <div className={styles.descriptionDiv}>
           <span className={styles.info}>
-            <Typography variant="body2" color="#90caf9">
+            <Typography variant="body2" color="#00F5D0">
               <FmdGoodOutlined className={styles.icon} />
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -28,7 +36,7 @@ const EventDetails = ({ eventData }: { eventData: EventData }) => {
             </Typography>
           </span>
           <span className={styles.info}>
-            <Typography variant="body2" color="#90caf9">
+            <Typography variant="body2" color="#00F5D0">
               <AccessTimeOutlined />{" "}
             </Typography>
             <Typography variant="body2" color="text.secondary">

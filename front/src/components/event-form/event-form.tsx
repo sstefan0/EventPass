@@ -61,6 +61,7 @@ const EventForm = ({ eventData }: { eventData: EventData }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        paddingBottom: "1%",
       }}
     >
       <Stepper
@@ -69,7 +70,7 @@ const EventForm = ({ eventData }: { eventData: EventData }) => {
           height: "100%",
           width: "50%",
           alignSelf: "center",
-          paddingBottom: "1%",
+          paddingTop: "0.5%",
         }}
       >
         {steps.map((label, index) => {
@@ -84,7 +85,19 @@ const EventForm = ({ eventData }: { eventData: EventData }) => {
           }
 
           return (
-            <Step key={label} {...stepProps}>
+            <Step
+              key={label}
+              {...stepProps}
+              sx={{
+                "& .MuiStepLabel-root .Mui-completed": {
+                  color: "#00F5D0", // circle color (COMPLETED)
+                },
+                "& .MuiStepLabel-root .Mui-active": {
+                  color: "#90caf9", // circle color (ACTIVE)
+                },
+                paddingBottom: "1%",
+              }}
+            >
               <StepLabel {...labelProps}>{label}</StepLabel>
             </Step>
           );
@@ -100,7 +113,14 @@ const EventForm = ({ eventData }: { eventData: EventData }) => {
               color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1, position: "absolute", bottom: 5, left: 5 }}
+              sx={{
+                mr: 1,
+                position: "absolute",
+                bottom: 5,
+                left: 5,
+                color: "#00F5D0",
+                "&:hover": { color: "#00a39e" },
+              }}
             >
               Back
             </Button>
@@ -110,14 +130,28 @@ const EventForm = ({ eventData }: { eventData: EventData }) => {
               <Button
                 onClick={handleNext}
                 disabled={!eventId && !eventData}
-                sx={{ position: "absolute", bottom: 5, right: 5 }}
+                sx={{
+                  position: "absolute",
+                  bottom: 5,
+                  right: 5,
+                  color: "#00F5D0",
+                  "&:hover": { color: "#00a39e" },
+                }}
               >
                 Next
               </Button>
             )}
             {activeStep === steps.length - 1 && (
               <Link to={"/event/" + eventId}>
-                <Button sx={{ position: "absolute", bottom: 5, right: 5 }}>
+                <Button
+                  sx={{
+                    position: "absolute",
+                    bottom: 5,
+                    right: 5,
+                    color: "#00F5D0",
+                    "&:hover": { color: "#00a39e" },
+                  }}
+                >
                   Skip
                 </Button>
               </Link>

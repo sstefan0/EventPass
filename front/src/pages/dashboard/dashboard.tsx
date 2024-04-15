@@ -54,8 +54,13 @@ const Dashboard = () => {
       <Link to="/manageEvent">
         <Tooltip title="Create new event" placement="left">
           <Fab
-            color="primary"
-            sx={{ position: "fixed", bottom: 16, right: 16 }}
+            sx={{
+              position: "fixed",
+              bottom: 16,
+              right: 16,
+              background: "#00F5D0",
+              "&:hover": { background: "#00a39e" },
+            }}
             onClick={() => console.log("kliknuo")}
           >
             <AddIcon />

@@ -11,6 +11,18 @@
   }
 }
 
+.eventCard:after {
+  transition: all ease-in-out 0.2s;
+  background: none repeat scroll 0 0 #00f5d0;
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+}
+.eventCard:hover:after {
+  width: 100%;
+}
+
 .info {
   display: flex;
   align-items: center;

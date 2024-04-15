@@ -1,9 +1,12 @@
 .container {
   width: 100%;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   overflow: auto;
   height: 80vh;
-  border: 3px solid #90caf980;
+  background-color: #242424;
+  border-bottom: 3px solid #00f5d0;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   @media (min-width: 1080px) {
     width: 70%;
   }
