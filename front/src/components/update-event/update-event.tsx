@@ -15,6 +15,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import { EventData } from "../../pages/event/event-page";
 import dayjs, { Dayjs } from "dayjs";
 import callApi from "../../api/api";
+import { TextFieldStyle } from "../../util/global-style";
 
 interface EventForm {
   title: string;
@@ -78,8 +79,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
       } else {
         setIsLoading(true);
         formData.append("image", addEventForm.file);
-        const imgResponse = await callApi.Event.uploadImage(formData);
-        imageUrl = await imgResponse.json();
+        imageUrl = await callApi.Event.uploadImage(formData);
       }
       let body: any = {};
       body.Id = eventData.id;
@@ -142,6 +142,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
           <TextField
             id="titleField"
             variant="outlined"
+            sx={TextFieldStyle}
             label="Title"
             type="text"
             name="title"
@@ -155,6 +156,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
         <TextField
           id="eventTypeSelect"
           label="Event Type"
+          sx={TextFieldStyle}
           variant="outlined"
           value={addEventForm.type}
           defaultValue=""
@@ -177,6 +179,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
         <div style={{ width: "100%" }}>
           <TextField
             id="description"
+            sx={TextFieldStyle}
             type="text"
             label="Description"
             multiline
@@ -198,6 +201,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
             id="dateTime"
             label="Date & Time"
             type="datetime-local"
+            sx={TextFieldStyle}
             name="eventDate"
             fullWidth
             value={dayjs(new Date(addEventForm.date)).format(
@@ -214,6 +218,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
             label="Country"
             onChange={handleCountryChange}
             variant="outlined"
+            sx={TextFieldStyle}
             defaultValue={""}
             value={addEventForm.country}
             select
@@ -229,6 +234,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
             id="city-select"
             label="City"
             variant="outlined"
+            sx={TextFieldStyle}
             value={addEventForm.city}
             defaultValue=""
             onChange={(e) => {
@@ -252,6 +258,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
         <div style={{ width: "100%" }}>
           <TextField
             id="address"
+            sx={TextFieldStyle}
             label="Address"
             type="text"
             fullWidth
@@ -277,6 +284,7 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
           <Button
             type="submit"
             variant="contained"
+            sx={{ background: "#00F5D0", "&:hover": { background: "#00a39e" } }}
             color={isSuccess ? "success" : "primary"}
             disabled={isLoading || isSuccess}
             fullWidth

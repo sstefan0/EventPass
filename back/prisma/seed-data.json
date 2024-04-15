@@ -75,7 +75,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "a978f48c-01a9-4575-a3ee-d9f270c72f2a",
       "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1JT1sYZe6-vZbnEwLyBpgP26KxYR38bsY"
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1C7zKKGQ6YVt4BjwdnqWc086v01XwlAEX&sz=w1000"
     },
     {
       "Id": "3247dd9d-808a-456d-b893-03759e007d43",
@@ -87,6 +87,61 @@
       "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
       "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
       "ImageUrl": "https://drive.google.com/thumbnail?id=1D6-2c_IW_5uP-QWPWJQ8qyJgJi7h-8Bh&sz=w1000"
+    },
+    {
+      "Id": "f906496f-280b-4415-80d1-4c7799397e13",
+      "Title": "Red Bull Showrun Sarajevo",
+      "Description": "Ta - daaa! Sad se sve zna. Po prvi put u historiji, bolid Formule 1 vozit će se ulicama Bosne i Hercegovine. Red Bull Showrun dolazi u Sarajevo u nedjelju, 9. juna i preobrazit će sami centar Sarajeva u jedinstvenu pozornicu za automobilistički performans tokom kojeg će legendarni Red Bull Racing Formula 1 bolid prirediti dan za pamćenje za sve posjetioce. Prateći program uključit će brojne zabavne i muzičke performanse, ali i nastupe poznatog njemačkog dvojca Red Bull Driftbrothers, te virtouza na stunt motoru Arasa Gibieza. A poruku ispred Red Bull Racinga, poslao nam je je niko drugi do legendarni F1 vozač David Coulthard koji nije krio oduševljenje Sarajevom i Bosnom i Hercegovinom.",
+      "DateTime": "2024-06-09T14:00:00z",
+      "Location": "Sarajevo, Centar",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "0518e3cb-b57c-4b22-9bc2-0a4d072864cc",
+      "eventTypeId": "98a9c5fc-57ef-49e0-85e2-b15d75e04e29",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1MbMbtfKFiiq1Gv_WP-vPRpsQzOTpq5Ta&sz=w1000"
+    },
+    {
+      "Id": "708cdc86-ee25-42a9-8c4a-76b95b09460b",
+      "Title": "Yu Grupa",
+      "Description": "Spektakularni koncert veterana rock muzike - YU Grupa u niškoj hali \"Čair\"!",
+      "DateTime": "2024-04-20T20:00:00z",
+      "Location": "Hala Čair, Niš",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "dc8600d9-15cb-4b67-8633-022e3f9ee0e7",
+      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1Y7Ezhl99g2MQoDMt3kXoYXs-6xUKM_7i&sz=w1000"
+    },
+    {
+      "Id": "a46178b3-b0fb-477c-9743-88e9824fa63a",
+      "Title": "Tri karte za operu",
+      "Description": "Prvi deo - Muzička predstava za decu u trajanju od 30 minuta. Drugi deo - Radionica koja se nastavlja odmah nakon predstave, u trajanju od 40 min, kojoj se, pored glumice i operske pevačice priključuje kompozitorka. Gledaoci predstave postaju učesnici radionice. Predstava je povod za direktno uključivanje u stvaranje muzike, te deca sa kompozitorkom na licu mesta komponuju svoje prvo muzičko delo. Ova predstava služi edukaciji dece tako da počnu da doživljavaju muziku na nov način, da počnu da je razumeju, da nauče šta sve i na koji način muzikom može da se prikaže, a potom (kroz radionicu) da se i sami oprobaju kao muzičari, kompozitori, dirigenti i da shvate muziku iznutra, a ne samo kao pasivni slušaoci. Veoma je bitno da na licu mesta dobijaju i proizvod svog rada – svoju zajedničku kompoziciju. Namenjeno deci starijoj od 4 godine.!",
+      "DateTime": "2024-04-27T11:00:00z",
+      "Location": "Gimnazija Laza Kostić, Novi Sad",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "f0b1f482-14c4-4a7c-b012-02fd1a9cb037",
+      "eventTypeId": "8eae97a5-6099-4a11-9031-d7d0b5cb9e10",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1M2RSFnhPy-wgORd4Rvm1UqKEP9H-K329&sz=w1000"
+    },
+    {
+      "Id": "923e8995-fa3e-4083-95e2-a1e78324adc3",
+      "Title": "Koncert Sarajevske Filharmonije",
+      "Description": "Jedna od najpoznatijih i najizvođenijih simfonija sjajnog P. I. Čajkovskog i zahtjevan i ne tako često izvođen Koncert za violinu Dmitria Šostakovića u izvedbi mlade i perspektivne violinistice, gošće iz Njemačke,Mire Foron, na progamu je ovog koncerta.\nOrkestar predvodi ovogodišnji šef dirigent, maestro Evan Alexis Christ.\nDa li je potreban razlog više da budete s nama ovu noć?\nProgram:\nM. Glinka: Uvertira “Ruslan i Ljudmila”\nD. Šostaković: Koncert za violinu i orkestar br. 1 u a-molu, op. 77\nP. I. Čajkovski: Simfonija br. 4 u f-molu, op. 36",
+      "DateTime": "2024-04-19T20:00:00z",
+      "Location": "Narodno pozorište Sarajevo",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "0518e3cb-b57c-4b22-9bc2-0a4d072864cc",
+      "eventTypeId": "8eae97a5-6099-4a11-9031-d7d0b5cb9e10",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1JQKZJOYnx3VJDiCH0-AC0Vj1ID3M2qAk&sz=w1000"
+    },
+    {
+      "Id": "26de3bed-4e94-4c8f-9344-b98b20f05330",
+      "Title": "SYMPHONIKA ON THE ROCK",
+      "Description": "PRVI PUT U BEOGRADU SPEKTAKULARNA PREDSTAVA U ČAST VELIKIM LEGENDAMA ROCKA „SYMPHONIKA ON THE ROCK“ 14. MAJA U MTS DVORANI Italijanski spektakl „Symphonika on the Rock“, posle rasprodatih koncerata u evropskim gradovima, po prvi put će nastupiti u Beogradu 14. maja u MTS Dvorani. Hitove legendarnih rock grupa Queen, Rolling Stones, Pink Floyd, AC/DC, Scorpions, Guns N' Roses, Led Zeppelin, Deep Purple, Beatles, Europe i mnogih drugih izvešće simfonijski orkestar sa rock bendom. Smenjivaće se pevači i posebni gosti koji će na najbolji način dočarati snagu bezvremenskih hitova. Ovaj muzički spektakl ne poznaje granice izvođenja, pa će u koncertu podjednako uživati različite generacije. Postavljeni su novi standardi izrade muzičkih aranžmana, interpretacija i samog muziciranja. Moćni glasovi solista ostavljaju bez daha, a publiku podižu na noge i izazivaju ovacije, pa se samo na koncertima „Symphonika on the Rock“ može doživeti posebna atmosfera. Zvučna snaga i emotivni naboj legendarnih hitova biće obogaćeni impresivnom scenografijom, zadivljujućim light show-om, laserima i video projekcijama, a pevači i rock bend će biti kostimirani što će stvoriti utisak da nastupaju muzičke legende lično. „Danas su stari svetski hitovi još uvek najslušaniji na muzičkim platformama, baš kao što su i grupe iz 60-ih, 70-ih i 80-ih godina još uvek najpopularnije među starijim i mlađim generacijama. Naša misija je da ponudimo nezaboravne koncerte koji daju novu formu najvećim rock klasicima, u predstavi koja oduševljava i privlači publiku svih uzrasta.“ ističu kreatori projekta.",
+      "DateTime": "2024-05-14T20:00:00z",
+      "Location": "MTS dvorana, Beograd",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
+      "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
+      "ImageUrl": "https://drive.google.com/thumbnail?id=1dpBSgLeBjkABec5nH3g6mpZt64td239X&sz=w1000"
     }
   ],
   "eventTickets": [
@@ -137,6 +192,118 @@
       "Price": 180.0,
       "Description": "Tribine, redovi 21 i dalje, III kategorija.",
       "Amount": 100
+    },
+    {
+      "Id": "e2e5351a-fbed-45e6-ae31-510f92cd23d8",
+      "EventId": "f906496f-280b-4415-80d1-4c7799397e13",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 119.0,
+      "Description": "Fan Pit tribine A i C",
+      "Amount": 150
+    },
+    {
+      "Id": "1302b154-e272-4a27-bf5e-d006f406b634",
+      "EventId": "f906496f-280b-4415-80d1-4c7799397e13",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 99.0,
+      "Description": "Fan Pit tribine B i D",
+      "Amount": 150
+    },
+    {
+      "Id": "b380b7ba-06a1-40c7-9888-867a4263c317",
+      "EventId": "708cdc86-ee25-42a9-8c4a-76b95b09460b",
+      "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Price": 20.0,
+      "Description": "Parter stajanje.",
+      "Amount": 150
+    },
+    {
+      "Id": "e31b0ac7-d11c-476b-8444-713e20629ea8",
+      "EventId": "708cdc86-ee25-42a9-8c4a-76b95b09460b",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 25.0,
+      "Description": "Tribine.",
+      "Amount": 150
+    },
+    {
+      "Id": "440125ca-df54-4451-86ec-170f2bd398bd",
+      "EventId": "708cdc86-ee25-42a9-8c4a-76b95b09460b",
+      "TicketTypeId": "d76f7d93-3a46-4f53-a84a-2e63d3d33b1b",
+      "Price": 30.0,
+      "Description": "VIP tribine.",
+      "Amount": 150
+    },
+    {
+      "Id": "9dcf9da4-0bb8-4eda-ba31-8cfa22b71692",
+      "EventId": "708cdc86-ee25-42a9-8c4a-76b95b09460b",
+      "TicketTypeId": "946d03b4-6057-4f38-9b08-ee244da1b42e",
+      "Price": 40.0,
+      "Description": "VIP barski stolovi stajanje.",
+      "Amount": 150
+    },
+    {
+      "Id": "fe3726e7-22c8-492f-b4b4-768aff70e634",
+      "EventId": "a46178b3-b0fb-477c-9743-88e9824fa63a",
+      "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Price": 10.0,
+      "Description": "Parter sedenje",
+      "Amount": 150
+    },
+    {
+      "Id": "a7b40b61-1974-43ae-88b2-324dc4f68f7f",
+      "EventId": "923e8995-fa3e-4083-95e2-a1e78324adc3",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 10.0,
+      "Description": "Galerija",
+      "Amount": 150
+    },
+    {
+      "Id": "2299f5a6-e8ad-41d2-8609-3131defb9ac5",
+      "EventId": "923e8995-fa3e-4083-95e2-a1e78324adc3",
+      "TicketTypeId": "ea88801f-b46d-4d39-93f5-795411e8077c",
+      "Price": 10.0,
+      "Description": "Balkon",
+      "Amount": 150
+    },
+    {
+      "Id": "27c6d726-56da-432d-becd-6c4408dc2d09",
+      "EventId": "923e8995-fa3e-4083-95e2-a1e78324adc3",
+      "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Price": 20.0,
+      "Description": "Parter",
+      "Amount": 150
+    },
+    {
+      "Id": "f4330617-678c-4682-8032-338d0f3883e7",
+      "EventId": "923e8995-fa3e-4083-95e2-a1e78324adc3",
+      "TicketTypeId": "d76f7d93-3a46-4f53-a84a-2e63d3d33b1b",
+      "Price": 40.0,
+      "Description": "VIP Loža",
+      "Amount": 150
+    },
+    {
+      "Id": "eaee0829-8f8b-49a6-b96d-6fe2be23b8e9",
+      "EventId": "26de3bed-4e94-4c8f-9344-b98b20f05330",
+      "TicketTypeId": "d76f7d93-3a46-4f53-a84a-2e63d3d33b1b",
+      "Price": 100.0,
+      "Description": "VIP Loža",
+      "Amount": 150
+    },
+    {
+      "Id": "fa267d05-beea-4a41-879b-b2932ba103be",
+      "EventId": "26de3bed-4e94-4c8f-9344-b98b20f05330",
+      "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Price": 80.0,
+      "Description": "Parter",
+      "Amount": 150
+    },
+    {
+      "Id": "f76bea77-d261-4245-92c3-eb6891cb9982",
+      "EventId": "26de3bed-4e94-4c8f-9344-b98b20f05330",
+      "TicketTypeId": "b26a3814-de69-4955-94af-2bdb21665499",
+      "Price": 90.0,
+      "Description": "Balkon",
+      "Amount": 150
     }
   ],
   "city": [
@@ -238,7 +405,7 @@
     { "Id": "8eae97a5-6099-4a11-9031-d7d0b5cb9e10", "Title": "Arts & Theater" },
     {
       "Id": "febce19d-45bf-487e-936f-0bcb9f106065",
-      "Title": "Conferences & Workshops"
+      "Title": "Others"
     }
   ]
 }

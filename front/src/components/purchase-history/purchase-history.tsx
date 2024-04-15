@@ -11,8 +11,8 @@ import { Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#90caf9",
-    color: theme.palette.common.white,
+    backgroundColor: "#010400",
+    color: "#00F5D0",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -20,9 +20,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
+  // "&:nth-of-type(odd)": {
+  //   backgroundColor: theme.palette.action.hover,
+  // },
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -45,7 +45,7 @@ export default function CustomizedTables(props: any) {
         </TableHead>
         <TableBody>
           {props.purchases.map((row: any) => (
-            <StyledTableRow key={row.Id}>
+            <StyledTableRow key={row.Id} hover>
               <StyledTableCell align="right">{row.Event}</StyledTableCell>
               <StyledTableCell align="right">
                 {new Date(row.EventDate).toLocaleString()}

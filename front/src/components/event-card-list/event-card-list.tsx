@@ -64,6 +64,7 @@ const EventList = () => {
     console.log(e.target.value);
     const value = e.target?.value as string;
     console.log(data);
+    setCity("");
 
     if (value != "") {
       try {
@@ -74,7 +75,6 @@ const EventList = () => {
       }
     } else {
       setCities([]);
-      setCity("");
     }
     setCountry(value);
   };

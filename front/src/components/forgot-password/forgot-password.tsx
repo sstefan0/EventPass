@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
 import callApi from "../../api/api";
+import { TextFieldStyle } from "../../util/global-style";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -34,6 +35,7 @@ const ForgotPassword = () => {
           variant="outlined"
           name="email"
           type="email"
+          sx={TextFieldStyle}
           onChange={(e) => setEmail(e.target.value)}
           required
           autoFocus
@@ -49,12 +51,21 @@ const ForgotPassword = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            background: "#00F5D0",
+            "&:hover": {
+              backgroundColor: "#00a39e",
+              boxShadow: "none",
+            },
+          }}
           color="info"
           disabled={isLoading || success}
         >
           {isLoading ? (
-            <CircularProgress size={15} sx={{ alignSelf: "center" }} />
+            <CircularProgress
+              size={15}
+              sx={{ alignSelf: "center", color: "#00F5D0" }}
+            />
           ) : (
             "Reset password"
           )}

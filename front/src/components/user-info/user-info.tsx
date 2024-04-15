@@ -9,7 +9,7 @@ const UserInfo = (props: any) => {
   return (
     <div className={styles.container}>
       <h2>{props.data.FirstName + " " + props.data.LastName}</h2>
-      <Divider color="#90caf9" />
+      <Divider color="#9c9583" />
       <div className={styles.row}>
         <div className={styles.title}>
           <AlternateEmailIcon />
@@ -19,7 +19,7 @@ const UserInfo = (props: any) => {
           <p> {props.data.Email}</p>
         </div>
       </div>
-      <Divider color="#90caf9" />
+      <Divider color="#9c9583" />
       <div className={styles.row}>
         <div className={styles.title}>
           <PhoneIcon />
@@ -29,7 +29,7 @@ const UserInfo = (props: any) => {
           <p>{props.data.PhoneNumber}</p>
         </div>
       </div>
-      <Divider color="#90caf9" />
+      <Divider color="#9c9583" />
       <div className={styles.row}>
         <div className={styles.title}>
           <StarIcon />

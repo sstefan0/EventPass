@@ -2,6 +2,13 @@ import { useNavigate, redirect } from "react-router-dom";
 import Login from "../../components/login/login";
 import { useEffect } from "react";
 import { getAuth } from "../../util/get-auth";
+import { ThemeProvider, createTheme } from "@mui/material";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,7 +18,11 @@ const LoginPage = () => {
     if (user) navigate("/");
   }, [user]);
 
-  return <Login />;
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <Login />
+    </ThemeProvider>
+  );
 };
 
 export default LoginPage;

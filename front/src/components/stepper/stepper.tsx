@@ -138,13 +138,26 @@ export default function HorizontalLinearStepper({
                   type="button"
                   variant="contained"
                   fullWidth
-                  color="primary"
+                  sx={{
+                    background: "#00F5D0",
+                    "&:hover": {
+                      backgroundColor: "#00a39e",
+                      boxShadow: "none",
+                    },
+                  }}
                   onClick={handlePurchase}
                   disabled={isLoading || isError}
                 >
                   Buy
                 </Button>
-                {isLoading && <CircularProgress sx={{ alignSelf: "center" }} />}
+                {isLoading && (
+                  <CircularProgress
+                    sx={{
+                      alignSelf: "center",
+                      color: "#00F5D0",
+                    }}
+                  />
+                )}
                 {isError && (
                   <Typography color={"red"}>
                     <span className={styles.info}>
@@ -165,11 +178,17 @@ export default function HorizontalLinearStepper({
                     type="button"
                     variant="contained"
                     fullWidth
-                    color="info"
                     onClick={handlePdf}
+                    sx={{
+                      background: "#00F5D0",
+                      "&:hover": {
+                        backgroundColor: "#00a39e",
+                        boxShadow: "none",
+                      },
+                    }}
                   >
                     {isLoading ? (
-                      <CircularProgress color="success" size={24} />
+                      <CircularProgress sx={{ color: "#D68C4" }} size={24} />
                     ) : (
                       "Export as PDF"
                     )}
@@ -208,8 +227,21 @@ export default function HorizontalLinearStepper({
           }
 
           return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+            <Step
+              key={label}
+              {...stepProps}
+              sx={{
+                "& .MuiStepLabel-root .Mui-completed": {
+                  color: "#00F5D0", // circle color (COMPLETED)
+                },
+                "& .MuiStepLabel-root .Mui-active": {
+                  color: "#90caf9", // circle color (ACTIVE)
+                },
+              }}
+            >
+              <StepLabel color="#00F5D0" {...labelProps}>
+                {label}
+              </StepLabel>
             </Step>
           );
         })}
@@ -224,7 +256,13 @@ export default function HorizontalLinearStepper({
               color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1, position: "absolute", bottom: 5, left: 5 }}
+              sx={{
+                mr: 1,
+                position: "absolute",
+                bottom: 5,
+                left: 5,
+                color: "#00F5D0",
+              }}
             >
               Back
             </Button>
@@ -233,7 +271,12 @@ export default function HorizontalLinearStepper({
             {activeStep < steps.length - 1 && (
               <Button
                 onClick={handleNext}
-                sx={{ position: "absolute", bottom: 5, right: 5 }}
+                sx={{
+                  position: "absolute",
+                  bottom: 5,
+                  right: 5,
+                  color: "#00F5D0",
+                }}
                 disabled={notEnough}
               >
                 Next
@@ -242,7 +285,12 @@ export default function HorizontalLinearStepper({
             {activeStep === steps.length - 1 && (
               <Button
                 onClick={onFinish}
-                sx={{ position: "absolute", bottom: 5, right: 5 }}
+                sx={{
+                  position: "absolute",
+                  bottom: 5,
+                  right: 5,
+                  color: "#00F5D0",
+                }}
               >
                 {purchaseEnabled ? "Cancel" : "Finish"}
               </Button>
