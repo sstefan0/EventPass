@@ -18,7 +18,7 @@ async function main() {
   const deleteEventTypes = prisma.eventType.deleteMany();
   await prisma.purchase.deleteMany();
 
-  await Promise.all([
+  await Promise.allSettled([
     deleteUsers,
     deleteCities,
     deleteTicketTypes,
@@ -38,7 +38,7 @@ async function main() {
     data: seedData.eventTickets,
   });
 
-  await Promise.all([
+  await Promise.allSettled([
     createUsers,
     createTicketTypes,
     createCities,

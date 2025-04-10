@@ -29,7 +29,6 @@ const Register = () => {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log(role);
       const response = await callApi.Auth.register({
         firstName,
         lastName,
@@ -49,7 +48,6 @@ const Register = () => {
         }
       }
     } catch (error: any) {
-      console.log(error);
       if (error.response.status === 409) setEmailUnavailable(true);
     }
   };

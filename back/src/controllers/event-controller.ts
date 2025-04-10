@@ -2,8 +2,6 @@ import { Request, Response, NextFunction, json } from "express";
 import { prisma } from "../util/prisma-client";
 import HttpException from "../util/http-exception";
 import { google } from "googleapis";
-import { CountryCode } from "@prisma/client";
-import clientSecret from "../../client-secret.json";
 import {
   AddTicketsDto,
   DeleteDto,
@@ -24,7 +22,6 @@ export const createEventController = async (
 ) => {
   try {
     const eventData = req.body as CreateEventDto;
-    console.log((req as any).user);
     const event = await prisma.event.create({
       data: { ...eventData, userId: (req as any).user.id },
     });
@@ -109,9 +106,7 @@ export const deleteTicketController = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.body);
     const ticketIds = req.body as DeleteTicketsDto;
-    console.log(ticketIds);
     const deletedTicket = await prisma.eventTicket.deleteMany({
       where: { Id: { in: ticketIds.tickets } },
     });
@@ -128,9 +123,7 @@ export const getEventsController = async (
 ) => {
   try {
     const reqParams = req.query as unknown as GetEventsDto;
-    console.log(reqParams);
     if (reqParams.id) {
-      console.log("daaa");
       const events = await prisma.event.findMany({
         where: { eventTypeId: reqParams.id },
         include: {
@@ -138,7 +131,6 @@ export const getEventsController = async (
         },
         orderBy: { DateTime: "asc" },
       });
-      console.log(events.length);
       res.status(200).json(events);
     } else {
       const events = await prisma.event.findMany({
@@ -301,7 +293,7 @@ export const uploadImageController = async (
 
     const fileMetadata = {
       name: randomUUID(),
-      parents: ["1bW4fGjItZOr_NU4HNVEczzwhOreLw8Mq"],
+      parents: ["10dx91QEvEErNDT_YwMKm4ypfVi0FbUL7"],
     };
     const media = {
       mimeType: (req as any).file?.mimetype,

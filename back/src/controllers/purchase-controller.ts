@@ -17,7 +17,6 @@ export const purchaseTicketsController = async (
 ) => {
   try {
     const purchaseData = req.body as PurchaseTicketDto;
-    console.log(purchaseData);
 
     const ticket = await prisma.eventTicket.findFirst({
       where: { Id: purchaseData.eventTicketId },
@@ -26,13 +25,11 @@ export const purchaseTicketsController = async (
       },
     });
 
-    console.log(ticket);
     if (!ticket) throw new HttpException(404, "Ticket not found.");
 
     if (ticket.Amount < purchaseData.Amount)
       throw new HttpException(400, "Not enough tickets left.");
 
-    console.log(purchaseData);
     const price = ticket.Price * purchaseData.Amount;
     const newAmount = ticket.Amount - purchaseData.Amount;
 
@@ -89,7 +86,6 @@ export const validateTicketController = async (
     const id = (req.query as unknown as ValidateDto).id;
     const ticket = await prisma.purchase.findFirst({ where: { Id: id } });
     if (!ticket) throw new HttpException(404, "Ticket not found");
-    console.log(ticket);
     if (ticket.Validated)
       throw new HttpException(403, "Ticket already validated.");
 

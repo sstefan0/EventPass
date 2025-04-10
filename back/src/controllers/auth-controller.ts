@@ -2,7 +2,7 @@ import { Request, Response, NextFunction, response } from "express";
 import { prisma } from "../util/prisma-client";
 import bcrypt from "bcrypt";
 import HttpException from "../util/http-exception";
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import { generateHTMLResetMessage, sendEmail } from "../util/mail-sender";
 import crypto from "crypto";
 import {
@@ -36,7 +36,7 @@ export const loginController = async (
     const accessToken = jwt.sign(
       { id: user.Id, name: user.FirstName, role: user.Role, email: user.Email },
       process.env.JWT_SECRET as string,
-      { expiresIn: process.env.JWT_EXPIRES_IN }
+      { expiresIn: process.env.JWT_EXPIRES_IN as string } as SignOptions
     );
     res.status(200).json({ accessToken: accessToken });
   } catch (e) {

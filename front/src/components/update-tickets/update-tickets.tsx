@@ -7,7 +7,6 @@ import { getEventTicketTypes } from "../../util/getTicketTypes";
 import { useNavigate } from "react-router-dom";
 import { EventData } from "../../pages/event/event-page";
 import callApi from "../../api/api";
-import EditIcon from "@mui/icons-material/Edit";
 import { TextFieldStyle } from "../../util/global-style";
 
 interface Ticket {
@@ -63,7 +62,6 @@ const UpdateTickets = ({
       Description: ticketForm.description,
       Amount: ticketForm.amount,
     };
-    console.log(eventId);
 
     setEventTickets([...eventTickets, newTicket]);
   };
@@ -87,7 +85,6 @@ const UpdateTickets = ({
     };
     fetchData();
   }, []);
-  console.log(createdTickets);
   return (
     <div className={styles.stepTwoContainer}>
       <form className={styles.eventDetailsContainer} onSubmit={handleAddTicket}>

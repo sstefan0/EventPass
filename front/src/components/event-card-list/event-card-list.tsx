@@ -49,21 +49,16 @@ const EventList = () => {
   }, [params.id]);
 
   const handleCityChange = (e: SelectChangeEvent<unknown>) => {
-    console.log(e.target.value);
     setCity(e.target.value as string);
   };
   const handleStartDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setStartDate(e.target.value as string);
   };
   const handleEndDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setEndDate(e.target.value as string);
   };
   const handleCountryChange = async (e: SelectChangeEvent<unknown>) => {
-    console.log(e.target.value);
     const value = e.target?.value as string;
-    console.log(data);
     setCity("");
 
     if (value != "") {

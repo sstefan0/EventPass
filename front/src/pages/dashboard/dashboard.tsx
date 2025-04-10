@@ -61,7 +61,6 @@ const Dashboard = () => {
               background: "#00F5D0",
               "&:hover": { background: "#00a39e" },
             }}
-            onClick={() => console.log("kliknuo")}
           >
             <AddIcon />
           </Fab>

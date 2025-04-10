@@ -82,7 +82,6 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log(e.target.value);
     const value = e.target?.value as string;
 
     if (value != "") {
@@ -207,7 +206,6 @@ const AddEvent = ({ onCreated }: { onCreated: (eventId: string) => void }) => {
             sx={TextFieldStyle}
             defaultValue=""
             onChange={(e) => {
-              console.log(e.target.value);
               setAddEventForm({ ...addEventForm, city: e.target.value });
             }}
             select

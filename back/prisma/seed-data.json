@@ -2,20 +2,20 @@
   "user": [
     {
       "Id": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
-      "FirstName": "Stefan",
-      "LastName": "Saratlija",
-      "Email": "saratlija.stefan6@gmail.com",
+      "FirstName": "Mirko",
+      "LastName": "Mirkovic",
+      "Email": "mmirkovic@gmail.com",
       "PhoneNumber": "12345673",
-      "Password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
+      "Password": "$2a$12$8a8xRppz.LcN7wJ3GwQxl.U3sIYrbuUtPmLxD1BVY.ETkEFYZsel6",
       "Role": "USER"
     },
     {
       "Id": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "FirstName": "Marko",
       "LastName": "Markovic",
-      "Email": "mmarkovic2@gmail.com",
+      "Email": "mmarkovic@gmail.com",
       "PhoneNumber": "12345673",
-      "Password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
+      "Password": "$2a$12$8a8xRppz.LcN7wJ3GwQxl.U3sIYrbuUtPmLxD1BVY.ETkEFYZsel6",
       "Role": "ORGANIZER"
     }
   ],
@@ -75,7 +75,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "a978f48c-01a9-4575-a3ee-d9f270c72f2a",
       "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1C7zKKGQ6YVt4BjwdnqWc086v01XwlAEX&sz=w1000"
+      "ImageUrl": ""
     },
     {
       "Id": "3247dd9d-808a-456d-b893-03759e007d43",
@@ -86,7 +86,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
       "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1D6-2c_IW_5uP-QWPWJQ8qyJgJi7h-8Bh&sz=w1000"
+      "ImageUrl": ""
     },
     {
       "Id": "f906496f-280b-4415-80d1-4c7799397e13",
@@ -97,7 +97,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "0518e3cb-b57c-4b22-9bc2-0a4d072864cc",
       "eventTypeId": "98a9c5fc-57ef-49e0-85e2-b15d75e04e29",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1MbMbtfKFiiq1Gv_WP-vPRpsQzOTpq5Ta&sz=w1000"
+      "ImageUrl": ""
     },
     {
       "Id": "708cdc86-ee25-42a9-8c4a-76b95b09460b",
@@ -108,7 +108,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "dc8600d9-15cb-4b67-8633-022e3f9ee0e7",
       "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1Y7Ezhl99g2MQoDMt3kXoYXs-6xUKM_7i&sz=w1000"
+      "ImageUrl": ""
     },
     {
       "Id": "a46178b3-b0fb-477c-9743-88e9824fa63a",
@@ -119,7 +119,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "f0b1f482-14c4-4a7c-b012-02fd1a9cb037",
       "eventTypeId": "8eae97a5-6099-4a11-9031-d7d0b5cb9e10",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1M2RSFnhPy-wgORd4Rvm1UqKEP9H-K329&sz=w1000"
+      "ImageUrl": ""
     },
     {
       "Id": "923e8995-fa3e-4083-95e2-a1e78324adc3",
@@ -130,7 +130,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "0518e3cb-b57c-4b22-9bc2-0a4d072864cc",
       "eventTypeId": "8eae97a5-6099-4a11-9031-d7d0b5cb9e10",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1JQKZJOYnx3VJDiCH0-AC0Vj1ID3M2qAk&sz=w1000"
+      "ImageUrl": ""
     },
     {
       "Id": "26de3bed-4e94-4c8f-9344-b98b20f05330",
@@ -141,7 +141,7 @@
       "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "cityId": "a99830dc-7827-4e28-93b4-55f1d91a3c6a",
       "eventTypeId": "ca5bf6ac-61b7-4a33-96fc-0655861587d6",
-      "ImageUrl": "https://drive.google.com/thumbnail?id=1dpBSgLeBjkABec5nH3g6mpZt64td239X&sz=w1000"
+      "ImageUrl": ""
     }
   ],
   "eventTickets": [

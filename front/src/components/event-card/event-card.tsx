@@ -34,7 +34,7 @@ const ActionAreaCard = ({
             component="img"
             height="140"
             image={eventImage}
-            alt="green iguana"
+            alt="img"
           />
           <CardContent>
             <Typography

@@ -67,7 +67,6 @@ const router = createBrowserRouter([
             userLoader(),
             eventTableLoader(),
           ]);
-          console.log(userData);
           return { userData, events };
         },
       },

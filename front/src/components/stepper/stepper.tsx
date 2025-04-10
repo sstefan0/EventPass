@@ -58,7 +58,6 @@ export default function HorizontalLinearStepper({
   };
 
   const handlePurchase = async () => {
-    console.log(ticketId);
     setIsLoading(true);
     try {
       const response = await callApi.Purchase.purchase({
@@ -79,7 +78,6 @@ export default function HorizontalLinearStepper({
     setIsLoading(true);
     try {
       const response = await callApi.Purchase.pdf(purchaseId);
-      console.log(response);
       const blob = new Blob([response], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -105,7 +103,6 @@ export default function HorizontalLinearStepper({
               label="Amount"
               onChange={(e) => {
                 const selectedAmount = Number(e.target.value);
-                console.log(selectedAmount, availableAmount);
                 if (selectedAmount > availableAmount) setNotEnough(true);
                 else setNotEnough(false);
                 setAmount(Number(e.target.value));

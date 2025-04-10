@@ -70,7 +70,6 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("dobar daaaan");
     try {
       const formData = new FormData();
       let imageUrl;
@@ -115,7 +114,6 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log(e.target.value);
     const value = e.target?.value as string;
 
     if (value != "") {
@@ -238,7 +236,6 @@ const UpdateEvent = ({ eventData }: { eventData: EventData }) => {
             value={addEventForm.city}
             defaultValue=""
             onChange={(e) => {
-              console.log(e.target.value);
               setAddEventForm({ ...addEventForm, city: e.target.value });
             }}
             select

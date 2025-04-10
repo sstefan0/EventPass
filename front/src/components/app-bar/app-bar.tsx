@@ -67,7 +67,6 @@ function ResponsiveAppBar({
   }, []);
 
   const params = useParams();
-  console.log(params);
   return (
     <AppBar
       position="static"
